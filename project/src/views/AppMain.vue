@@ -1,17 +1,23 @@
 <template>
   <v-main>
-    <v-container fluid >
+    <v-container fluid>
       <video muted autoplay loop>
         <source src="@/assets/main.mp4" type="video/mp4" />
       </video>
-      <div>
-        <div>
-          WHERE IS MY HOME
-        </div>
-        <v-btn href="#">
+      
+      <v-overlay z-index="0">
+        <!-- <p id="mainTitle">WHERE IS MY HOME</p> -->
+        <v-btn
+          color="success"
+          x-large
+          :to="{name: 'map'}"
+        >
           매물	검색하러 가기
         </v-btn>
-      </div>
+        <!-- <v-btn href="#">
+          
+        </v-btn> -->
+      </v-overlay>
     </v-container>
   </v-main>
 </template>
@@ -22,10 +28,10 @@ export default {
 }
 </script>
 
-<style>
+<style scope>
   video {
-    height: 100%;
     width: 100%;
-    opacity: 0.7;
+    height: 1000px;
+    object-fit: fill;
   }
 </style>

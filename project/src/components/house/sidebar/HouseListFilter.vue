@@ -1,9 +1,11 @@
 <template>
-  <div>
+  <v-app-bar 
+    color="grey lighten-3"
+  >
     <v-btn>filter1</v-btn>
     <v-btn>filter2</v-btn>
     <v-btn>filter3</v-btn>
-  </div>
+  </v-app-bar>
 </template>
 
 <script>

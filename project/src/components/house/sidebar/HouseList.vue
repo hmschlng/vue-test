@@ -1,14 +1,23 @@
 <template>
   <div>
     <h2>HouseList</h2>
-    <table>
+    <!-- <table>
         <thead>
             <th>1</th>
             <th>2</th>
             <th>3</th>
         </thead>
-        <house-list-item></house-list-item>        
-    </table>
+      </table> -->
+    <house-list-item></house-list-item>        
+    <v-list>
+      <v-list-item-group v-model="model">
+        <v-list-item>
+        <v-card
+          elevation="2"
+        ></v-card>
+        </v-list-item>
+      </v-list-item-group>
+    </v-list>
     <house-detail></house-detail>
   </div>
 </template>

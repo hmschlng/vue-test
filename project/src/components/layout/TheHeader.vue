@@ -1,56 +1,114 @@
 <template>
   <v-app-bar app absolute clipped-left>
+    <!-- 홈 버튼 아이콘 -->
     <router-link style="text-decoration:none"
     :to="{ name: 'main' }"
     ><v-icon x-large>mdi-home-heart</v-icon></router-link>
+
+    <!-- 서비스 제목 -->
     <v-toolbar-title default>
       WHERE IS MY HOME
     </v-toolbar-title>
-    <v-spacer></v-spacer>
-      <v-btn
-        v-for="menu in menus"
-        :key="menu"
-        text
-        :to="menu.link"
-      >
-        {{ menu.value }}
-      </v-btn>
-      <!-- <router-link :to="{ name: 'map'}" > 지도</router-link>
-      <router-link :to="{ name: 'community'}" > 커뮤니티</router-link>
-      <router-link :to="{ name: 'news'}" > 부동산 뉴스</router-link>
-      <router-link :to="{ name: 'login'}" > 로그인 | 회원가입</router-link> -->
-      <v-avatar
-          class="mr-10"
-          color="grey darken-1"
-          size="32"
-        ><v-btn :to="{ name: 'profile'}" /></v-avatar>
-      <!--  -->
+
+    <v-spacer/>
+    
+    <!-- 메뉴 -->
+    <v-btn
+      v-for="menu in menus"
+      :key="menu"
+      text
+      :to="{ name: menu.link }"
+      
+    >
+      {{ menu.value }}
+    </v-btn>
+  
+  <!-- <v-spacer/> -->
+
+  <!-- 프로필 -->
+    <v-avatar size="32">
+      <img 
+        src="https://cdn.vuetifyjs.com/images/john.jpg"
+        alt="John">
+    </v-avatar>
+    <v-menu offset-y>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          flat
+          small
+          color="transparent"
+          elevation="0"
+          v-bind="attrs"
+          v-on="on"
+        >
+          김싸피님
+          <!-- 프로필 이미지 -->
+        </v-btn>
+      </template>
+      <v-list>
+        <v-list-item
+          v-for="(item, index) in profile"
+          :key="index"
+        >
+          <router-link :to="{ name: item.name}" style="text-decoration:none"> {{ item.title }}</router-link>
+        </v-list-item>
+      </v-list>
+    </v-menu>
   </v-app-bar>
 </template>
 
 <script>
 export default {
-    name: "TheHeader",
-    data: () => ({
-      menus: [
-        {
-          link: { name: 'map'},
-          value: "지도"
-        },
-        {
-          link: { name: 'community'},
-          value: "커뮤니티"
-        },
-        {
-          link: { name: 'news'},
-          value: "부동산 뉴스"
-        },
-        {
-          link: { name: 'login'},
-          value: "로그인 | 회원가입"
-        },
-      ],
-    }),
+  name: "TheHeader",
+  data() {
+    return {
+      menus: [],
+      profile: []
+    };
+  },
+
+  created() {
+    this.menus = [
+      {
+        link: 'map',
+        value: "지도"
+      },
+      {
+        link: 'community',
+        value: "커뮤니티"
+      },
+      {
+        link: 'news',
+        value: "부동산 뉴스"
+      },
+      {
+        link: 'login',
+        value: "로그인 | 회원가입"
+      },
+    ],
+    this.profile = [
+      {
+        name: 'mypage',
+        title: "내정보"
+      },
+      {
+        name: 'wishlist',
+        title: "찜 목록"
+      },
+      {
+        name: 'notice',
+        title: "공지사항"
+      },
+      {
+        name: 'helpcenter',
+        title: "고객센터"
+      },
+      {
+        name: 'mypage',
+        title: "로그아웃"
+      },
+    ]
+  }
 }
 </script>
 

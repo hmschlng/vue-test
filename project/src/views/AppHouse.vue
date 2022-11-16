@@ -1,9 +1,8 @@
 <template>
   <v-main>
-    <v-navigation-drawer app permanent clipped fixed>
       <house-sidebar></house-sidebar>
-    </v-navigation-drawer>    
     <v-container fluid>
+      <house-map-filter></house-map-filter>
       <house-map></house-map>
     </v-container>
   </v-main>
@@ -11,12 +10,14 @@
 
 <script>
 import HouseSidebar from "@/components/house/sidebar/HouseSidebar";
+import HouseMapFilter from "@/components/house/map/HouseMapFilter";
 import HouseMap from "@/components/house/map/HouseMap";
 
 export default {
   name: "AppHouse",
   components: {
     HouseSidebar,
+    HouseMapFilter,
     HouseMap
   }
 };
