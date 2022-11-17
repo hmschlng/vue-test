@@ -2,8 +2,9 @@
   <v-navigation-drawer
     app 
     permanent 
-    clipped 
     fixed
+    clipped 
+    elevation="2"
     width="300px"
   >
     <house-list-filter></house-list-filter>

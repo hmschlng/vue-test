@@ -1,5 +1,6 @@
 <template>
-  <v-app-bar app absolute clipped-left>
+  <v-app-bar app absolute clipped-left
+  style="z-index:2;">
     <!-- 홈 버튼 아이콘 -->
     <router-link style="text-decoration:none"
     :to="{ name: 'main' }"
@@ -17,8 +18,7 @@
       v-for="menu in menus"
       :key="menu"
       text
-      :to="{ name: menu.link }"
-      
+      :to="menu.link"
     >
       {{ menu.value }}
     </v-btn>
@@ -34,7 +34,6 @@
     <v-menu offset-y>
       <template v-slot:activator="{ on, attrs }">
         <v-btn
-          flat
           small
           color="transparent"
           elevation="0"
@@ -47,10 +46,10 @@
       </template>
       <v-list>
         <v-list-item
-          v-for="(item, index) in profile"
-          :key="index"
+          v-for="menu in profile"
+          :key="menu"
         >
-          <router-link :to="{ name: item.name}" style="text-decoration:none"> {{ item.title }}</router-link>
+          <router-link :to="menu.link" style="text-decoration:none"> {{ menu.value }}</router-link>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -70,42 +69,42 @@ export default {
   created() {
     this.menus = [
       {
-        link: 'map',
+        link: { name: 'map' },
         value: "지도"
       },
       {
-        link: 'community',
+        link: { name: 'community' },
         value: "커뮤니티"
       },
       {
-        link: 'news',
+        link: { name: 'news' },
         value: "부동산 뉴스"
       },
       {
-        link: 'login',
+        link: { name: 'login' },
         value: "로그인 | 회원가입"
       },
     ],
     this.profile = [
       {
-        name: 'mypage',
-        title: "내정보"
+        link: { name: 'mypage' },
+        value: "내정보"
       },
       {
-        name: 'wishlist',
-        title: "찜 목록"
+        link: { name: 'wishlist' },
+        value: "찜 목록"
       },
       {
-        name: 'notice',
-        title: "공지사항"
+        link: { name: 'notice' },
+        value: "공지사항"
       },
       {
-        name: 'helpcenter',
-        title: "고객센터"
+        link: { name: 'helpcenter' },
+        value: "고객센터"
       },
       {
-        name: 'mypage',
-        title: "로그아웃"
+        link: { name: 'mypage' },
+        value: "로그아웃"
       },
     ]
   }
