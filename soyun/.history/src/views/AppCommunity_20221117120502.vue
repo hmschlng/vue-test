@@ -1,0 +1,23 @@
+<template>
+  <v-main>
+    <board-header></board-header>
+    <search-bar></search-bar>
+    <router-view></router-view>
+  </v-main>
+</template>
+
+<script>
+import BoardHeader from "@/components/board/BoardHeader.vue";
+import BoardSearch from "@/components/board/BoardSearch.vue";
+import SearchBar from "@/components/layout/SearchBar.vue";
+
+export default {
+  name: "AppCommunity",
+  components: { BoardHeader, BoardSearch },
+};
+</script>
+,
+    SearchBar
+<style>
+
+</style>

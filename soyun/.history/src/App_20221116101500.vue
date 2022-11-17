@@ -1,0 +1,22 @@
+<template>
+  <v-app>
+    <v-app-bar app elevation="0" >
+      <the-header></the-header>
+    </v-app-bar>
+    <v-main>
+      <router-view></router-view>
+    </v-main>
+    <v-footer app></v-footer>
+  </v-app>
+</template>
+
+<script>
+import TheHeader from "@/components/layout/TheHeader";
+
+export default {
+  name: "App",
+  components: {
+    TheHeader,
+  },
+};
+</script>

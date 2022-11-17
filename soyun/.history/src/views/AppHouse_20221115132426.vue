@@ -1,0 +1,23 @@
+<template>
+  <div>
+    <h2>AppHouse</h2>
+    HouseSidebar
+  </div>
+</template>
+
+<script>
+import HouseSidebar from "@/components/house/sidebar/HouseSidebar";
+import HouseMap from "@/components/house/map/HouseMap";
+
+export default {
+  name: "AppHouse",
+  components: {
+    HouseSidebar,
+    HouseMap
+  }
+};
+</script>
+
+<style>
+
+</style>

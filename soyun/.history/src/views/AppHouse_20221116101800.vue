@@ -1,0 +1,27 @@
+<template>
+  <div>
+    <v-navigation-drawer permanent clipped>
+      <house-sidebar></house-sidebar>
+    </v-navigation-drawer>    
+    <v-container fluid>
+      <house-map></house-map>
+    </v-container>
+  </div>
+</template>
+
+<script>
+import HouseSidebar from "@/components/house/sidebar/HouseSidebar";
+import HouseMap from "@/components/house/map/HouseMap";
+
+export default {
+  name: "AppHouse",
+  components: {
+    HouseSidebar,
+    HouseMap
+  }
+};
+</script>
+
+<style>
+
+</style>
