@@ -1,18 +1,12 @@
 <template>
-  <v-main>
-    <video muted autoplay loop>
-      <source src="@/assets/main.mp4" type="video/mp4" />
-    </video>
-    <router-view></router-view>
-  </v-main>
+  <router-view></router-view>
 </template>
 
 <script>
 export default {
-  name: "AppMember"
-}
+  name: "AppMember",
+};
 </script>
 
 <style>
-
 </style>

@@ -1,16 +1,17 @@
 <template>
   <v-main>
-    <v-container fluid>
-      <video muted autoplay loop>
-        <source src="@/assets/main.mp4" type="video/mp4" />
-      </video>
-      <v-overlay z-index=0 >
-          <v-btn v-show="!isShow" color="success" @click="a">
-            매물	검색하러 가기
-          </v-btn>
-          <house-search v-show="isShow"></house-search>
-      </v-overlay>
-    </v-container>
+    <video muted autoplay loop>
+      <source src="@/assets/main.mp4" type="video/mp4" />
+    </video>
+    <v-overlay z-index="0">
+      <v-col v-show="!isShow" align="center">
+        <div class="text-h1 font-weight-bold">WHERE IS MY HOME</div>
+        <v-btn color="success" @click="clickBtn" class="ma-8" x-large>
+          매물 검색하러 가기
+        </v-btn>
+      </v-col>
+      <house-search v-show="isShow"></house-search>
+    </v-overlay>
   </v-main>
 </template>
 
@@ -19,21 +20,24 @@ import HouseSearch from "@/components/layout/HouseSearch";
 export default {
   name: "AppMain",
   components: {
-    HouseSearch
+    HouseSearch,
   },
   data() {
     return {
-      isShow: false
+      isShow: false,
     };
   },
   methods: {
-    a(){
+    clickBtn() {
       this.isShow = true;
-    }
+    },
   },
-}
+};
 </script>
 
-<style>
-
+<style scoped>
+  video {
+    position: fixed;
+    object-fit: fill;
+  }
 </style>

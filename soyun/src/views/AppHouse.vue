@@ -1,11 +1,7 @@
 <template>
-  <v-main class="red">
-    <v-navigation-drawer app permanent clipped fixed>
-      <house-sidebar></house-sidebar>
-    </v-navigation-drawer>    
-    <v-container fluid>
-      <house-map></house-map>
-    </v-container>
+  <v-main id="appHouse">
+    <house-sidebar></house-sidebar>
+    <house-map></house-map>
   </v-main>
 </template>
 
@@ -17,11 +13,13 @@ export default {
   name: "AppHouse",
   components: {
     HouseSidebar,
-    HouseMap
-  }
+    HouseMap,
+  },
 };
 </script>
 
-<style>
-
+<style scoped>
+#appHouse {
+  position: absolute;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
 <div>
-    <h2>List {{ getTab }}</h2>
+    <!-- <h2>List {{ getTab }}</h2> -->
     <v-simple-table>
         <thead>
             <tr>

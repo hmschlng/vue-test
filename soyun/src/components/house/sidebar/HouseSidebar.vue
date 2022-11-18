@@ -1,9 +1,16 @@
 <template>
-  <div>
-    <h2>HouseSidebar</h2>
+  <v-navigation-drawer
+    app 
+    permanent 
+    fixed
+    clipped 
+    elevation="2"
+    width="300px"
+    relative
+  >
     <house-list-filter></house-list-filter>
     <house-list></house-list>
-  </div>
+  </v-navigation-drawer>
 </template>
 
 <script>
