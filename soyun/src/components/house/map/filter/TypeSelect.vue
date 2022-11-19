@@ -15,6 +15,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+#listFilter > button {
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+}
 </style>

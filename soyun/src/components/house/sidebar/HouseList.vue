@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div id="houseList">
     <v-list>
       <v-list-item-group v-model="model">
+        <house-list-item></house-list-item>
+        <house-list-item></house-list-item>
         <house-list-item></house-list-item>
         <house-list-item></house-list-item>
       </v-list-item-group>
@@ -27,5 +29,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+#houseList {
+  position: relative;
+  top: 54px;
+  padding: 10px;
+  z-index: -1;
+}
 </style>

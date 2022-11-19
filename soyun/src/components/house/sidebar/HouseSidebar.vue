@@ -26,5 +26,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+::v-deep ::-webkit-scrollbar {
+  width: 0;
+  background-color: transparent;
+}
+#houseSideBar {
+  z-index: 3;
+}
 </style>

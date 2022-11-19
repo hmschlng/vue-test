@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar id="listFilter" color="grey lighten-4" elevation="3">
+  <v-app-bar id="listFilter" color="grey lighten-4" elevation="3" outlined permanent fixed>
     <v-btn-toggle id="listFilter" group dense>
       <v-btn> 최신순 </v-btn>
 
@@ -33,9 +33,13 @@ export default {
 };
 </script>
 
-<style scope>
+<style scoped>
+#houseListFilter {
+  z-index: 0;
+}
 #listFilter > button {
   border: 1px solid gainsboro;
   border-radius: 5px;
 }
 </style>
+

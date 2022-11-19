@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app clipped-left fixed style="z-index: 2;">
+  <v-app-bar app clipped-left fixed style="z-index: 2">
     <!-- 홈 버튼 아이콘 + 서비스 제목 -->
     <router-link :to="{ name: 'main' }">
       <v-row align="center">

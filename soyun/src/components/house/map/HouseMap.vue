@@ -3,28 +3,25 @@
   fluid
   >
     <house-map-filter></house-map-filter>
-    <v-img id="tempimg"
-    src="@/assets/tempmap.png"
-    ></v-img>
+    <kakao-map></kakao-map>
   </v-container>
 </template>
 
 <script>
 import HouseMapFilter from "@/components/house/map/HouseMapFilter";
+import KakaoMap from "@/components/house/map/KakaoMap";
 
 export default {
   name: "HouseMap",
   components: {
     HouseMapFilter,
+    KakaoMap,
   }
-}
+};
 </script>
 
-<style>
-  #mapContainer {
-    padding: 0;
-  }
-  #tempimg {
-    height: 805px;
-  }
+<style scoped>
+#mapContainer {
+  padding: 0;
+}
 </style>

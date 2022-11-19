@@ -1,5 +1,11 @@
 <template>
-  <v-app-bar id="mapFilter" color="grey lighten-4" elevation="3" absolute fixed>
+  <v-app-bar id="mapFilter"
+  color="grey lighten-4"
+  elevation="3"
+  absolute
+  fixed
+  outlined
+  >
     <type-select></type-select>
 
     <v-divider id="filterDivider" inset vertical></v-divider>
@@ -32,13 +38,14 @@ export default {
 };
 </script>
 
-<style scope>
+<style scoped>
 #mapFilter #filterDivider {
   padding-right: 5px;
   padding-left: 5px;
   margin-right: 10px;
 }
 #mapFilter {
+  width: 100%;
   z-index: 2;
   padding-top: 0px;
 }
