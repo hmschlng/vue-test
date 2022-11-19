@@ -40,7 +40,7 @@ export default {
   },
   computed: {
     getOptions() {
-      return this.$store.state.options;
+      return this.$store.state.searchOptions;
     },
   },
 };

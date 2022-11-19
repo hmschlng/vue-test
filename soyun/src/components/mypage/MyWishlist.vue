@@ -1,20 +1,20 @@
 <template>
-  <div>
-    <v-list>
+  <div class="pa-6 pt-16">
+    <h2>Wishlist</h2>
+        <v-list>
       <v-list-item-group v-model="model">
         <house-list-item></house-list-item>
         <house-list-item></house-list-item>
       </v-list-item-group>
     </v-list>
-    <!-- <house-detail></house-detail> -->
   </div>
 </template>
 
 <script>
 import HouseListItem from "@/components/house/sidebar/HouseListItem";
-// import HouseDetail from "@/components/house/sidebar/HouseDetail";
+
 export default {
-  name: "HouseList",
+ name: "MyWishlist",
   data() {
     return {
       model: null,
@@ -24,8 +24,9 @@ export default {
     HouseListItem,
     // HouseDetail
   },
-};
+}
 </script>
 
 <style>
+
 </style>

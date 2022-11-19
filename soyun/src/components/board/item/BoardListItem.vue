@@ -1,19 +1,32 @@
 <template>
   <tr>
-    <th>1</th>
-    <td>2</td>
-    <td>3</td>
-    <td>4</td>
-    <td>5</td>
+    <td>{{ articleno }}</td>
+    <th> <router-link :to="{ name: 'boarddetail', params: { articleno: articleno } }">{{ subject }}</router-link></th>
+    <td>{{ author }}</td>
+    <td>{{ hit }}</td>
+    <td>{{ registerDate }}</td>
   </tr>
 </template>
 
 <script>
+// import moment from "moment";
+
 export default {
-    name: "BoardListItem"
-}
+  name: "BoardListItem",
+  props: {
+    articleno: Number,
+    subject: String,
+    author: String,
+    hit: Number,
+    registerDate: String,
+  },
+  // filters: {
+  //   dataFormat(registerDate){
+  //     return moment(new Date(registerDate)).format("YYYY.MM.DD");
+  //   }
+  // }
+};
 </script>
 
 <style>
-
 </style>

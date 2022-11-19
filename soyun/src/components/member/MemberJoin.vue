@@ -21,7 +21,7 @@
           <v-text-field v-model="name" outlined></v-text-field>
           <label>연락처</label>
           <v-text-field v-model="phoneNumber" outlined></v-text-field>
-          <v-btn large width="100%">가입하기</v-btn>
+          <v-btn large width="100%" :to="{name: 'login'}">가입하기</v-btn>
         </v-form>
       </v-col>
       <v-spacer />
@@ -34,7 +34,7 @@ export default {
   name: "MemberJoin",
   data() {
     return {
-      mainWidth: this.$store.getters.mainWidth,
+      mainWidth: this.$store.state.mainWidth,
       emailId: null,
       emailDomain: null,
       password: null,

@@ -1,5 +1,5 @@
 <template>
-  <v-main>
+  <v-main id="appMain">
     <video muted autoplay loop>
       <source src="@/assets/main.mp4" type="video/mp4" />
     </video>
@@ -10,13 +10,13 @@
           매물 검색하러 가기
         </v-btn>
       </v-col>
-      <house-search v-show="isShow"></house-search>
     </v-overlay>
+    <house-search v-show="isShow"></house-search>
   </v-main>
 </template>
 
 <script>
-import HouseSearch from "@/components/layout/HouseSearch";
+import HouseSearch from "@/components/house/HouseSearch";
 export default {
   name: "AppMain",
   components: {
@@ -36,6 +36,9 @@ export default {
 </script>
 
 <style scoped>
+/* #appMain {
+  position: absolute;
+} */
   video {
     position: fixed;
     object-fit: fill;

@@ -1,42 +1,62 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-import AppMain from '@/views/AppMain'
-import AppHouse from '@/views/AppHouse'
+import AppMain from "@/views/AppMain";
+import AppHouse from "@/views/AppHouse";
 // import AppCommunity from '@/views/AppCommunity'
 // import AppNews from '@/views/AppNews'
 // import AppMember from '@/views/AppMember'
-
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'main',
-    component: AppMain
+    path: "/",
+    name: "main",
+    component: AppMain,
   },
   {
-    path: '/map',
-    name: 'map',
-    component: AppHouse
+    path: "/map",
+    name: "map",
+    component: AppHouse,
   },
   {
-    path: '/community',
-    name: 'community',
+    path: "/community",
+    name: "community",
     component: () => import("@/views/AppCommunity"),
+    redirect: "/community/main",
     children: [
+      {
+        path: "main",
+        name: "boardmain",
+        component: () => import("@/components/board/BoardMain"),
+      },
       {
         path: "list",
         name: "boardlist",
-        component: () => import("@/components/board/BoardList")
+        component: () => import("@/components/board/BoardList"),
+      },
+      {
+        path: "write",
+        name: "boardwrite",
+        component: () => import("@/components/board/BoardWrite"),
+      },
+      {
+        path: "detail/:articleno",
+        name: "boarddetail",
+        component: () => import("@/components/board/BoardDetail"),
+      },
+      {
+        path: "update",
+        name: "boardupdate",
+        component: () => import("@/components/board/BoardUpdate"),
       },
     ],
   },
   {
-    path: '/news',
-    name: 'news',
-    component: () => import("@/views/AppNews")
+    path: "/news",
+    name: "news",
+    component: () => import("@/views/AppNews"),
   },
   // {
   //   path: '/house',
@@ -56,55 +76,56 @@ const routes = [
   //   ]
   // },
   {
-    path: '/member',
-    name: 'member',
+    path: "/member",
+    name: "member",
     component: () => import("@/views/AppMember"),
     children: [
       {
         path: "login",
         name: "login",
-        component: () => import("@/components/member/MemberLogin")
+        component: () => import("@/components/member/MemberLogin"),
       },
       {
         path: "join",
         name: "join",
-        component: () => import("@/components/member/MemberJoin")
+        component: () => import("@/components/member/MemberJoin"),
       },
-    ]
+    ],
   },
   {
-    path: "/profile",
-    name: "profile",
-    component: () => import("@/views/TempProfile"),
+    path: "/mypage",
+    name: "mypage",
+    component: () => import("@/views/AppMypage"),
+    redirect: "/mypage/myinfo",
     children: [
       {
-        path: "mypage",
-        name: "mypage",
-        component: () => import("@/components/profile/ProfileMypage")
+        path: "myinfo",
+        name: "myinfo",
+        component: () => import("@/components/mypage/MyInfo"),
       },
       {
         path: "wishlist",
         name: "wishlist",
-        component: () => import("@/components/profile/ProfileWishlist")
+        component: () => import("@/components/mypage/MyWishlist"),
       },
       {
-        path: "notice",
-        name: "notice",
-        component: () => import("@/components/profile/ProfileNotice")
+        path: "mycommunity",
+        name: "mycommunity",
+        component: () => import("@/components/mypage/MyCommunity"),
       },
-      {
-        path: "helpcenter",
-        name: "helpcenter",
-        component: () => import("@/components/profile/ProfileHelpcenter")
-      },
-    ]
+      // {
+      //   path: "helpcenter",
+      //   name: "helpcenter",
+      //   component: () => import("@/components/profile/ProfileHelpcenter"),
+      // },
+    ],
   },
-]
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes,
-})
+});
 
 export default router;

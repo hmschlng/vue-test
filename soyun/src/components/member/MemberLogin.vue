@@ -9,7 +9,7 @@
         <form>
           <v-text-field
             class="mb-5"
-            v-model="email"
+            v-model="emailId"
             placeholder="ssafy@ssafy.com"
             outlined
             hide-details
@@ -46,6 +46,8 @@ export default {
   name: "MemberLogin",
   data() {
     return {
+      emailId: null,
+      password: null,
       svid: null,
     };
   },

@@ -32,7 +32,8 @@
       </template>
       <v-list>
         <v-list-item v-for="(item, index) in profile" :key="index">
-          <v-btn :to="{ name: item.name }" text> {{ item.title }}</v-btn>
+          <v-icon>mdi-{{item.icon}}</v-icon>
+          <v-btn :to="{ name: item.link }" text> {{ item.value }}</v-btn>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -64,24 +65,34 @@ export default {
       ],
       profile: [
         {
-          name: "mypage",
-          title: "내정보",
+          link: "mypage",
+          value: "내정보",
+          icon: "account",
         },
         {
-          name: "wishlist",
-          title: "찜 목록",
+          link: "wishlist",
+          value: "찜 목록",
+          icon: "cards-heart",
         },
         {
-          name: "notice",
-          title: "공지사항",
+          link: "mycommunity",
+          value: "내글 목록",
+          icon: "pencil-box-multiple",
         },
         {
-          name: "helpcenter",
-          title: "고객센터",
+          link: "notice",
+          value: "공지사항",
+          icon: "note-multiple",
         },
         {
-          name: "mypage",
-          title: "로그아웃",
+          link: "helpcenter",
+          value: "고객센터",
+          icon: "face-agent",
+        },
+        {
+          link: "mypage",
+          value: "로그아웃",
+          icon: "account-arrow-right-outline",
         },
       ],
     };

@@ -1,9 +1,9 @@
 <template>
   <v-navigation-drawer
-    app 
-    permanent 
+    app
+    permanent
     fixed
-    clipped 
+    clipped
     elevation="2"
     width="300px"
     relative
@@ -18,14 +18,13 @@ import HouseList from "@/components/house/sidebar/HouseList";
 import HouseListFilter from "@/components/house/sidebar/HouseListFilter";
 
 export default {
-    name: "HouseSidebar",
-    components: {
-        HouseList,
-        HouseListFilter
-    }
+  name: "HouseSidebar",
+  components: {
+    HouseList,
+    HouseListFilter,
+  },
 };
 </script>
 
 <style>
-
 </style>

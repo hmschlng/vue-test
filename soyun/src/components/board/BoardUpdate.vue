@@ -3,8 +3,8 @@
     <v-row>
       <v-spacer />
       <v-col :cols="mainWidth">
-        <h2 class="my-10 text-center">글등록</h2>
-        <board-input-item type="register"></board-input-item>
+        <h2 class="my-10 text-center">글수정</h2>
+        <board-input-item type="update"></board-input-item>
       </v-col>
       <v-spacer />
     </v-row>
@@ -15,7 +15,7 @@
 import BoardInputItem from "@/components/board/item/BoardInputItem";
 
 export default {
-  name: "BoardWrite",
+  name: "BoardUpdate",
   components: {
     BoardInputItem
   },

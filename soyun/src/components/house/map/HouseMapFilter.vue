@@ -1,21 +1,13 @@
 <template>
-  <v-app-bar id="mapFilter"
-  color="grey lighten-4"
-  elevation="3"
-  absolute
-  fixed
-  >
-    
+  <v-app-bar id="mapFilter" color="grey lighten-4" elevation="3" absolute fixed>
     <type-select></type-select>
 
-    <v-divider id="filterDivider"
-    inset 
-    vertical></v-divider>
-    
+    <v-divider id="filterDivider" inset vertical></v-divider>
+
     <!-- 지역 선택 -->
     <location-select></location-select>
 
-    <v-spacer/>
+    <v-spacer />
 
     <!-- 검색창 -->
     <search-bar></search-bar>
@@ -35,19 +27,19 @@ export default {
     TypeSelect,
     LocationSelect,
     SearchBar,
-    SearchButton
-  }
-}
+    SearchButton,
+  },
+};
 </script>
 
 <style scope>
-  #mapFilter #filterDivider {
-    padding-right: 5px;
-    padding-left: 5px;
-    margin-right: 10px;
-  }
-  #mapFilter {
-    z-index: 2;
-    padding-top: 0px;
-  }
+#mapFilter #filterDivider {
+  padding-right: 5px;
+  padding-left: 5px;
+  margin-right: 10px;
+}
+#mapFilter {
+  z-index: 2;
+  padding-top: 0px;
+}
 </style>

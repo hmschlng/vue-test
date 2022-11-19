@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style scoped>
-  html{
-        overflow-y: hidden !important;
-      }
+html {
+  overflow-y: hidden !important;
+}
 </style>

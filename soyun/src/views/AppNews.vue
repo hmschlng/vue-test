@@ -1,5 +1,6 @@
 <template>
   <v-main>
+    <the-banner></the-banner>
     <v-row class="mt-5">
       <v-spacer />
       <v-col :cols="mainWidth">
@@ -15,16 +16,18 @@
 <script>
 import BoardList from "@/components/board/BoardList";
 import SearchBar from "@/components/layout/SearchBar";
+import TheBanner from "@/components/layout/TheBanner";
 
 export default {
   name: "AppNews",
   components: {
     BoardList,
     SearchBar,
+    TheBanner,
   },
   data() {
     return {
-      mainWidth: this.$store.getters.mainWidth,
+      mainWidth: this.$store.state.mainWidth,
       options: [
         {
           text: "제목",
@@ -38,7 +41,7 @@ export default {
     };
   },
   created() {
-    this.$store.commit("SET_OPTIONS", this.options);
+    this.$store.commit("SET_SEARCH_OPTIONS", this.options);
   },
 };
 </script>
