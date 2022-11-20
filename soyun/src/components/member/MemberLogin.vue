@@ -54,5 +54,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+video {
+  position: fixed;
+  object-fit: fill;
+}
+html {
+  overflow: hidden !important;
+}
 </style>
