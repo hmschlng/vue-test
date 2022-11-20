@@ -25,7 +25,7 @@ export default {
   components: { MypageSidebar },
   data() {
     return {
-      mainWidth: this.$store.state.mainWidth + 1,
+      mainWidth: this.$store.state.mainStore.mainWidth + 1,
     };
   },
 };
