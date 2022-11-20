@@ -3,11 +3,6 @@
     id="houseSearch"
     color="grey lighten-4"
     elevation="2"
-    absolute
-    fixed
-    permanent
-    clipped
-    relative
   >
     <!-- 지역 선택 -->
     <location-select></location-select>

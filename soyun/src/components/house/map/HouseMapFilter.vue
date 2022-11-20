@@ -13,6 +13,8 @@
     <!-- 지역 선택 -->
     <location-select></location-select>
 
+    <v-divider id="filterDivider" inset vertical></v-divider>
+    
     <v-spacer />
 
     <!-- 검색창 -->

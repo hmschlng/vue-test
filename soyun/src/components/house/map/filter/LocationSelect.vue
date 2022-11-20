@@ -1,5 +1,5 @@
 <template>
-  <v-btn-toggle group dense>
+  <v-btn-toggle id="locationSelect" group dense>
     <!-- 시도 선택 메뉴 -->
     <v-menu offset-y>
       <template v-slot:activator="{ on, attrs }">
@@ -63,7 +63,6 @@
         <v-btn id="menuBtn"
           v-bind="attrs"
           v-on="on"
-          
         >
           {{ date }}
         </v-btn>
@@ -76,6 +75,9 @@
         :picker-date.sync="date"
       ></v-date-picker>
     </v-menu>
+    <v-spacer></v-spacer>
+    <v-btn id="menuBtn"><v-icon>mdi-tune</v-icon></v-btn>
+    <v-btn id="menuBtn">결과 조회</v-btn>
   </v-btn-toggle>
 </template>
 
@@ -133,12 +135,16 @@ export default {
 
     setCurrentDong(dong) {
       this.currentDong = dong;
-    }
+    },
+
   },
 };
 </script>
 
 <style scoped>
+#locationSelect {
+  width: 40%;
+}
 #menuBtn {
   border: 1px solid gainsboro;
   border-radius: 5px;
