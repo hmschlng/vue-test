@@ -26,7 +26,7 @@ export default {
   name: "BoardDetail",
   data() {
     return {
-      mainWidth: this.$store.state.mainWidth,
+      mainWidth: this.$store.state.mainStore.mainWidth,
       articleno: this.$route.params.articleno,
     };
   },

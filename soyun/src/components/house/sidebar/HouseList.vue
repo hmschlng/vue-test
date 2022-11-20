@@ -6,6 +6,10 @@
         <house-list-item></house-list-item>
         <house-list-item></house-list-item>
         <house-list-item></house-list-item>
+        <house-list-item></house-list-item>
+        <house-list-item></house-list-item>
+        <house-list-item></house-list-item>
+        <house-list-item></house-list-item>
       </v-list-item-group>
     </v-list>
     <!-- <house-detail></house-detail> -->

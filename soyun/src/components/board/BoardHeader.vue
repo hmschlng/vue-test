@@ -28,8 +28,8 @@ export default {
   name: "BoardHeader",
   data() {
     return {
-      mainWidth: this.$store.state.mainWidth,
-      tab: this.$store.state.communityTab,
+      mainWidth: this.$store.state.mainStore.mainWidth,
+      tab: this.$store.state.boardStore.communityTab,
       tabs: ["정보 공유", "우리 동네"],
     };
   },

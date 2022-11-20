@@ -2,35 +2,21 @@ import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 
-// modul import
-// import mainStore from "@/store/modules/mainStore";
-// import boardStore from "@/store/modules/boardStore";
+// module import
+import mainStore from "@/store/modules/mainStore";
+import boardStore from "@/store/modules/boardStore";
+import AptSearchParams from "@/store/modules/AptSearchParams";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+let store = new Vuex.Store({
   namespaced: true,
-  state: {
-    mainWidth: 7,
-    communityTab: 0,
-    searchOptions: [],
-  },
-  getters: {
-    // communityTab(state) {
-    //   return state.communityTab;
-    // },
-  },
-  mutations: {
-    SET_COMMUNITY_TAB(state, tab) {
-      state.communityTab = tab;
-    },
-    SET_SEARCH_OPTIONS(state, options) {
-      state.searchOptions = options;
-    },
-  },
+
+  // 모듈 추가
   modules: {
-    // mainStore,
-    // boardStore
+    AptSearchParams,
+    mainStore,
+    boardStore,
   },
   plugins: [
     createPersistedState({
@@ -39,3 +25,5 @@ export default new Vuex.Store({
     }),
   ],
 });
+
+export default store;

@@ -72,7 +72,7 @@ export default {
   },
   computed: {
     getTab() {
-      return this.$store.state.communityTab;
+      return this.$store.state.boardStore.communityTab;
     },
   },
 };

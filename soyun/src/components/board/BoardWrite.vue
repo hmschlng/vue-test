@@ -21,7 +21,7 @@ export default {
   },
   data() {
     return {
-      mainWidth: this.$store.state.mainWidth,
+      mainWidth: this.$store.state.mainStore.mainWidth,
     };
   },
 };

@@ -22,7 +22,7 @@ export default {
   components: {},
   data() {
     return {
-      tab: this.$store.state.communityTab,
+      tab: this.$store.state.boardStore.communityTab,
       tabs: ["내정보", "찜 목록", "내글 목록"],
       links: [
           "mypage",

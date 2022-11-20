@@ -1,60 +1,81 @@
 <template>
-  <v-btn-toggle
-    group
-    dense
-  >
+  <v-btn-toggle group dense>
+    <!-- 시도 선택 메뉴 -->
     <v-menu offset-y>
       <template v-slot:activator="{ on, attrs }">
-        <v-btn id="btn"
+        <v-btn id="menuBtn"
           v-bind="attrs"
           v-on="on"
         >
-          시도
+          {{ currentSido.name }}
         </v-btn>
       </template>
-      <v-list>
-        <v-list-item v-for="item in sido" :key="item">
-          <v-btn depressed text>
-            {{item}}
+      <!-- 리스트 -->
+      <v-list style="height:400px; overflow-y: scroll;">
+        <v-list-item v-for="(sido, index) in sidoList" :key="index">
+          <v-btn depressed text @click="getGugunList(sido)">
+            {{ sido.name }}
           </v-btn>
         </v-list-item>
       </v-list>
     </v-menu>
+    <!-- 시군구 선택 메뉴 -->
     <v-menu offset-y>
       <template v-slot:activator="{ on, attrs }">
-        <v-btn id="btn"
+        <v-btn id="menuBtn"
           v-bind="attrs"
           v-on="on"
         >
-          시/군/구
+          {{ currentGugun.name }}
         </v-btn>
       </template>
-      <v-list>
-        <v-list-item v-for="item in gugun" :key="item">
-          <v-btn depressed text>
-            {{item}}
+      <!-- 리스트 -->
+      <v-list style="height:400px; overflow-y: scroll;">
+        <v-list-item v-for="(gugun, index) in gugunList" :key="index">
+          <v-btn depressed text @click="getDongList(gugun)">
+            {{ gugun.name }}
           </v-btn>
         </v-list-item>
       </v-list>
     </v-menu>
+    <!-- 동 선택 메뉴 -->
     <v-menu offset-y>
       <template v-slot:activator="{ on, attrs }">
-        <v-btn id="btn"
+        <v-btn id="menuBtn"
           v-bind="attrs"
           v-on="on"
         >
-          동
+          {{ currentDong.name }}
         </v-btn>
       </template>
-      <v-list>
-        <v-list-item v-for="item in dong" :key="item">
-          <v-btn depressed text>
-            {{item}}
+      <!-- 리스트 -->
+      <v-list style="height:400px; overflow-y: scroll;">
+        <v-list-item v-for="(dong, index) in dongList" :key="index">
+          <v-btn depressed text @click="setCurrentDong(dong)">
+            {{ dong.name }}
           </v-btn>
         </v-list-item>
       </v-list>
     </v-menu>
-
+    <!-- 날짜 선택 메뉴 -->
+    <v-menu offset-y>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn id="menuBtn"
+          v-bind="attrs"
+          v-on="on"
+          
+        >
+          {{ date }}
+        </v-btn>
+      </template>
+      <v-date-picker id="monthPicker"
+        color="grey lighten-1"
+        elevation="4"
+        type="month"
+        v-model="date"
+        :picker-date.sync="date"
+      ></v-date-picker>
+    </v-menu>
   </v-btn-toggle>
 </template>
 
@@ -64,43 +85,65 @@ export default {
   name: "LoactionSelect",
   data() {
     return {
-      sido: [
-        '서울특별시',
-        '부산광역시',
-        '대구광역시',
-        '인천광역시',
-        '광주광역시',
-        '대전광역시',
-        '울산광역시',
-      ],
-      gugun: [
-        '종로구',
-        '중구',
-        '용산구',
-        '성동구',
-        '광진구',
-        '동대문구',
-        '중랑구',
-      ],
-      dong: [
-        '청운동',
-        '신교동',
-        '궁정동',
-        '효자동',
-        '창성동',
-        '통의동',
-        '적선동',
-      ],
+      sidoList: [],
+      gugunList: [],
+      dongList: [],
+      currentSido: { name: "시도", code: "-1", },
+      currentGugun: { name: "시/군/구", code: "-1", },
+      currentDong: { name: "동", code: "-1", },
+      date: "날짜",
     }
   },
-  components: {
-  }
-}
+  created() {
+    this.date = new Date().toISOString().substring(0, 7);
+  },
+  async mounted() {
+    console.log("created");
+    await this.$store.dispatch("getSidoList");
+    console.log("dispatch complete!!");
+    this.sidoList = this.$store.state.AptSearchParams.sidoList;
+    console.log("this.sidoList ↓");
+    console.dir(this.sidoList);
+    console.log("====================");
+  },
+  methods: {
+    async getGugunList(sido) {
+      console.log(`Button clicked!! -> (${sido.name})`);
+      this.currentSido = sido;
+      console.log(`sido button is changed to ${this.currentSido}!!`);
+      await this.$store.dispatch("getGugunList", sido.code);
+      console.log("dispatch complete!!");
+      this.gugunList = this.$store.state.AptSearchParams.gugunList;
+      console.log("this.gugunList ↓");
+      console.dir(this.gugunList);
+      console.log("====================");
+    }, 
+
+    async getDongList(gugun) {
+      console.log(`Button clicked!! -> (${gugun.name})`);
+      this.currentGugun = gugun;
+      console.log(`gugun button is changed to ${this.currentGugun}!!`);
+      await this.$store.dispatch("getDongList", gugun.code);
+      console.log("dispatch complete!!");
+      this.dongList = this.$store.state.AptSearchParams.dongList;
+      console.log("this.dongList ↓");
+      console.dir(this.dongList);
+      console.log("====================");
+    },
+
+    setCurrentDong(dong) {
+      this.currentDong = dong;
+    }
+  },
+};
 </script>
 
-<style scope>
-  #btn {
-    border: 1px solid gainsboro;
-    border-radius: 5px;
-  }
+<style scoped>
+#menuBtn {
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+}
+#monthPicker {
+  height: 400px;
+}
 </style>

@@ -1,11 +1,11 @@
-// const mainStore = {
-//   namespaced: true,
-//   state: {
-//     mainWidth: 7,
-//   },
-//   getters: {},
-//   mutations: {},
-//   actions: {},
-// };
+let mainStore = {
+  namespaced: true,
+  state: {
+    mainWidth: 7,
+  },
+  getters: {},
+  mutations: {},
+  actions: {},
+};
 
-// export default mainStore;
+export default mainStore;

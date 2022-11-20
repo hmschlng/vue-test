@@ -34,7 +34,7 @@ export default {
   name: "MemberJoin",
   data() {
     return {
-      mainWidth: this.$store.state.mainWidth,
+      mainWidth: this.$store.state.mainStore.mainWidth,
       emailId: null,
       emailDomain: null,
       password: null,

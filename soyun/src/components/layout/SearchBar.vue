@@ -40,7 +40,7 @@ export default {
   },
   computed: {
     getOptions() {
-      return this.$store.state.searchOptions;
+      return this.$store.state.boardStore.searchOptions;
     },
   },
 };
