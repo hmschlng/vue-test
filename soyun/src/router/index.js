@@ -96,7 +96,6 @@ const routes = [
     path: "/mypage",
     name: "mypage",
     component: () => import("@/views/AppMypage"),
-    redirect: "/mypage/myinfo",
     children: [
       {
         path: "myinfo",
@@ -113,11 +112,29 @@ const routes = [
         name: "mycommunity",
         component: () => import("@/components/mypage/MyCommunity"),
       },
-      // {
-      //   path: "helpcenter",
-      //   name: "helpcenter",
-      //   component: () => import("@/components/profile/ProfileHelpcenter"),
-      // },
+    ],
+  },
+  {
+    path: "/notice",
+    name: "notice",
+    component: () => import("@/views/AppNotice"),
+  },
+  {
+    path: "/helpcenter",
+    name: "helpcenter",
+    component: () => import("@/views/AppHelpcenter"),
+    redirect: "/helpcenter/qna",
+    children: [
+      {
+        path: "qna",
+        name: "qna",
+        component: () => import("@/components/etc/TheQna"),
+      },
+      {
+        path: "faq",
+        name: "faq",
+        component: () => import("@/components/etc/TheFaq"),
+      },
     ],
   },
 ];

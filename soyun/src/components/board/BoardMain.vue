@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import BoardHeader from "@/components/board/BoardHeader";
 import SearchBar from "@/components/layout/SearchBar";
 import BoardList from "@/components/board/BoardList";
@@ -42,8 +43,11 @@ export default {
       ],
     };
   },
+   methods: {
+    ...mapMutations("boardStore", ["SET_SEARCH_OPTIONS"]),
+   },
   created() {
-    this.$store.commit("SET_SEARCH_OPTIONS", this.options);
+    this.SET_SEARCH_OPTIONS(this.options);
   },
 };
 </script>

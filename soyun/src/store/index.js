@@ -5,6 +5,7 @@ import createPersistedState from "vuex-persistedstate";
 // module import
 import mainStore from "@/store/modules/mainStore";
 import boardStore from "@/store/modules/boardStore";
+import mypageStore from "@/store/modules/mypageStore";
 import AptSearchParams from "@/store/modules/AptSearchParams";
 
 Vue.use(Vuex);
@@ -17,6 +18,7 @@ let store = new Vuex.Store({
     AptSearchParams,
     mainStore,
     boardStore,
+    mypageStore
   },
   plugins: [
     createPersistedState({

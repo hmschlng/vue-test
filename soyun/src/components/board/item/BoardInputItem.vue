@@ -4,7 +4,7 @@
     <v-text-field v-model="subject" outlined></v-text-field>
     <label>내용</label>
     <v-textarea v-model="contents" outlined></v-textarea>
-    <v-row justify="end">
+    <v-row v-if="this.type !== 'qna'" justify="end">
       <v-btn
         v-if="this.type === 'register'"
         :to="{ name: 'community' }"

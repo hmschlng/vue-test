@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 export default {
   name: "BoardHeader",
   data() {
@@ -34,11 +36,9 @@ export default {
     };
   },
   methods: {
+    ...mapMutations("boardStore", ["SET_COMMUNITY_TAB"]),
     clickTab(selectedTab) {
-      this.$store.commit("SET_COMMUNITY_TAB", selectedTab);
-      // this.$router.replace({
-      //   name: "boardlist",
-      // });
+      this.SET_COMMUNITY_TAB(selectedTab);
     },
   },
 };

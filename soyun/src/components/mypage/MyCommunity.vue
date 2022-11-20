@@ -6,17 +6,18 @@
       </v-tab>
     </v-tabs>
     <v-container class="pa-6">
-    <board-list></board-list>
+      <board-list></board-list>
     </v-container>
   </div>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import BoardList from "@/components/board/BoardList";
 
 export default {
   name: "MyCommunity",
-  components: {  BoardList },
+  components: { BoardList },
   data() {
     return {
       mainWidth: this.$store.state.mainStore.mainWidth,
@@ -25,11 +26,9 @@ export default {
     };
   },
   methods: {
+    ...mapMutations("boardStore", ["SET_COMMUNITY_TAB"]),
     clickTab(selectedTab) {
-      this.$store.commit("SET_COMMUNITY_TAB", selectedTab);
-      // this.$router.replace({
-      //   name: "boardlist",
-      // });
+      this.SET_COMMUNITY_TAB(selectedTab);
     },
   },
 };

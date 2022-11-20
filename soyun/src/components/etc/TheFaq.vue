@@ -1,15 +1,18 @@
 <template>
   <div>
-    <h2>TheFaq</h2>
+    <h1 class="text-center">FAQ</h1>
   </div>
 </template>
 
 <script>
 export default {
-
-}
+  name: "BoardMain",
+  data() {
+    return {
+    };
+  },
+};
 </script>
 
 <style>
-
 </style>

@@ -31,8 +31,8 @@
         </v-btn>
       </template>
       <v-list>
-        <v-list-item v-for="(item, index) in profile" :key="index">
-          <v-icon>mdi-{{item.icon}}</v-icon>
+        <v-list-item v-for="(item, index) in mypage" :key="index">
+          <v-icon>mdi-{{ item.icon }}</v-icon>
           <v-btn :to="{ name: item.link }" text> {{ item.value }}</v-btn>
         </v-list-item>
       </v-list>
@@ -63,9 +63,9 @@ export default {
           value: "로그인 | 회원가입",
         },
       ],
-      profile: [
+      mypage: [
         {
-          link: "mypage",
+          link: "myinfo",
           value: "내정보",
           icon: "account",
         },
