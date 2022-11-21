@@ -6,7 +6,7 @@ import createPersistedState from "vuex-persistedstate";
 import mainStore from "@/store/modules/mainStore";
 import boardStore from "@/store/modules/boardStore";
 import mypageStore from "@/store/modules/mypageStore";
-import AptSearchParams from "@/store/modules/AptSearchParams";
+import AptSearchStore from "@/store/modules/AptSearchStore";
 
 Vue.use(Vuex);
 
@@ -15,7 +15,7 @@ let store = new Vuex.Store({
 
   // 모듈 추가
   modules: {
-    AptSearchParams,
+    AptSearchStore,
     mainStore,
     boardStore,
     mypageStore

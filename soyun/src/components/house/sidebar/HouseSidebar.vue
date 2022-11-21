@@ -5,7 +5,7 @@
     fixed
     clipped
     elevation="2"
-    width="300px"
+    width="20%"
     relative
   >
     <house-list-filter></house-list-filter>

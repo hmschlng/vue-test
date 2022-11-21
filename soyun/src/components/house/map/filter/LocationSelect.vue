@@ -75,9 +75,9 @@
         :picker-date.sync="date"
       ></v-date-picker>
     </v-menu>
-    <v-spacer></v-spacer>
-    <v-btn id="menuBtn"><v-icon>mdi-tune</v-icon></v-btn>
-    <v-btn id="menuBtn">결과 조회</v-btn>
+    <div style="width: 5%"></div>
+    <v-btn id="menuBtn" @click="restoreSelected"><v-icon>mdi-tune</v-icon></v-btn>
+    <v-btn id="menuBtn" @click="getAptListBySelect">결과 조회</v-btn>
   </v-btn-toggle>
 </template>
 
@@ -93,29 +93,39 @@ export default {
       currentSido: { name: "시도", code: "-1", },
       currentGugun: { name: "시/군/구", code: "-1", },
       currentDong: { name: "동", code: "-1", },
-      date: "날짜",
+      date: null,
+      aptList: [],
     }
   },
   created() {
     this.date = new Date().toISOString().substring(0, 7);
   },
   async mounted() {
-    console.log("created");
-    await this.$store.dispatch("getSidoList");
-    console.log("dispatch complete!!");
-    this.sidoList = this.$store.state.AptSearchParams.sidoList;
-    console.log("this.sidoList ↓");
-    console.dir(this.sidoList);
-    console.log("====================");
+    this.getSidoList();
   },
   methods: {
+    async getSidoList() {
+      // 기존에 있었던 검색 결과들은 초기화
+      if (this.$store.state.AptSearchStore.aptList) {
+        this.$store.state.AptSearchStore.aptList = [];
+        this.aptList = [];
+      }
+      console.log("created");
+      await this.$store.dispatch("getSidoList");
+      console.log("dispatch complete!!");
+      this.sidoList = this.$store.state.AptSearchStore.sidoList;
+      console.log("this.sidoList ↓");
+      console.dir(this.sidoList);
+      console.log("====================");
+    },
+
     async getGugunList(sido) {
       console.log(`Button clicked!! -> (${sido.name})`);
       this.currentSido = sido;
       console.log(`sido button is changed to ${this.currentSido}!!`);
       await this.$store.dispatch("getGugunList", sido.code);
       console.log("dispatch complete!!");
-      this.gugunList = this.$store.state.AptSearchParams.gugunList;
+      this.gugunList = this.$store.state.AptSearchStore.gugunList;
       console.log("this.gugunList ↓");
       console.dir(this.gugunList);
       console.log("====================");
@@ -127,7 +137,7 @@ export default {
       console.log(`gugun button is changed to ${this.currentGugun}!!`);
       await this.$store.dispatch("getDongList", gugun.code);
       console.log("dispatch complete!!");
-      this.dongList = this.$store.state.AptSearchParams.dongList;
+      this.dongList = this.$store.state.AptSearchStore.dongList;
       console.log("this.dongList ↓");
       console.dir(this.dongList);
       console.log("====================");
@@ -137,6 +147,48 @@ export default {
       this.currentDong = dong;
     },
 
+    restoreSelected() {
+      if (window.confirm("선택한 지역을 초기화하시겠습니까?")) {
+        this.currentSido.name = "시도";
+        this.currentGugun.name = "시/군/구";
+        this.currentDong.name = "동";
+        this.gugunList = [];
+        this.dongList = [];
+        this.date = new Date().toISOString().substring(0, 7);
+        this.getSidoList();
+      } else {
+        return;
+      }
+    },
+
+    async getAptListBySelect() {
+      // 기존에 있었던 검색 결과들은 초기화
+      if (this.$store.state.AptSearchStore.aptList) {
+        this.$store.state.AptSearchStore.aptList = [];
+        this.aptList = [];
+      }
+      console.log(`Button clicked!! -> (결과조회)`);
+      let yearMonth = this.date.replace("-","");
+      console.log(">>>>>>>>>>>yearMonth", yearMonth);
+      // 시도는 필수적으로 선택하도록 함
+      if (!this.currentSido) {
+        alert("시도를 먼저 선택해주세요.");
+      } else {
+        if (!this.currentDong) {
+          // 동이 선택되어 있지 않으면 구군까지로 검색
+          await this.$store.dispatch("getAptListBySelect", { code: this.currentGugun.code, yearMonth });
+        } else {
+          // 동이 선택되어 있다면 동 단위로 검색
+          await this.$store.dispatch("getAptListBySelect", { code: this.currentDong.code, yearMonth });
+        }
+      }
+      console.log("dispatch complete!!");
+      this.$store.state.AptSearchStore.currentLocation = { loc: this.currentSido.name + " " + this.currentGugun.name + " " + this.currentDong.name };
+      this.aptList = this.$store.state.AptSearchStore.aptList;
+      console.log("this.aptList ↓");
+      console.dir(this.aptList);
+      console.log("====================");
+    }
   },
 };
 </script>
