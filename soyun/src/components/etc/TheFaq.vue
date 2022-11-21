@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-6">
+  <div class="mt-8" style="height: 60vh">
     <v-expansion-panels v-model="panel" multiple accordion focusable>
       <v-expansion-panel v-for="(faq, i) in faqs" :key="i">
         <v-expansion-panel-header>Q. {{faq.q}}</v-expansion-panel-header>

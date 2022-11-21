@@ -1,35 +1,30 @@
 <template>
-  <v-main>
-    <board-header></board-header>
-    <v-row>
-      <v-spacer />
-      <v-col :cols="mainWidth">
-        <v-row align="center" justify="end" class="ma-1">
-          <v-btn :to="{ name: 'boardwrite' }" color="primary">글작성</v-btn>
-          
-        </v-row>
-        <board-list></board-list>
-        <v-row align="center" justify="center" class="ma-1">
-         <search-bar></search-bar>
-        </v-row>
-      </v-col>
-      <v-spacer />
+  <div>
+    <v-row align="center" justify="end" class="ma-1 mt-6">
+      <v-btn :to="{ name: 'boardwrite' }" color="primary" large>글작성</v-btn>
     </v-row>
-  </v-main>
+    <board-list></board-list>
+    <div class="text-center my-8">
+      <v-pagination v-model="page" :length="6"></v-pagination>
+    </div>
+    <v-row align="center" justify="center" class="mb-8">
+      <search-bar></search-bar>
+    </v-row>
+  </div>
 </template>
 
 <script>
 import { mapMutations } from "vuex";
-import BoardHeader from "@/components/board/BoardHeader";
 import SearchBar from "@/components/layout/SearchBar";
 import BoardList from "@/components/board/BoardList";
 
 export default {
   name: "BoardMain",
-  components: { BoardHeader, SearchBar, BoardList,},
+  components: { SearchBar, BoardList },
   data() {
     return {
       mainWidth: this.$store.state.mainStore.mainWidth,
+      page: 1,
       options: [
         {
           text: "제목",
@@ -46,9 +41,9 @@ export default {
       ],
     };
   },
-   methods: {
+  methods: {
     ...mapMutations("boardStore", ["SET_SEARCH_OPTIONS"]),
-   },
+  },
   created() {
     this.SET_SEARCH_OPTIONS(this.options);
   },
