@@ -1,15 +1,33 @@
 <template>
   <div id="houseList">
     <v-list>
-      <v-list-item-group v-model="model">
-        <house-list-item></house-list-item>
-        <house-list-item></house-list-item>
-        <house-list-item></house-list-item>
-        <house-list-item></house-list-item>
-        <house-list-item></house-list-item>
-        <house-list-item></house-list-item>
-        <house-list-item></house-list-item>
-        <house-list-item></house-list-item>
+      <v-list-item-group v-show="isAptExist">
+        <v-card class="mb-3" elevation="1" v-for="(apt, index) in aptList" :key="index">
+          <v-list-item three-line>
+            <v-list-item-content>
+              <!-- <div class="text-overline mb-4">
+                아파트
+              </div> -->
+              <v-list-item-title class="mb-1">
+                {{ apt.apartmentName }}
+              </v-list-item-title>
+              <v-list-item-subtitle>{{ currentLocation.loc }} {{ apt.jibun }} 번지</v-list-item-subtitle>
+              <v-list-item-subtitle>34평</v-list-item-subtitle>
+              <v-list-item-subtitle>3억 2천만원</v-list-item-subtitle>
+            </v-list-item-content>
+            <v-list-item-avatar
+              tile
+              size="80"
+              color="grey"
+            >
+              <img src="https://img.freepik.com/premium-photo/modern-beautiful-new-high-rise-residential-building-colored-wall-on-the-background-of-blue-sky-copy-space_158388-6884.jpg?w=2000">
+            </v-list-item-avatar>
+          </v-list-item>
+
+          <v-card-actions>
+            <v-btn outlined rounded text>상세보기</v-btn>
+          </v-card-actions>
+        </v-card>
       </v-list-item-group>
     </v-list>
     <!-- <house-detail></house-detail> -->
@@ -17,19 +35,38 @@
 </template>
 
 <script>
-import HouseListItem from "@/components/house/sidebar/HouseListItem";
 // import HouseDetail from "@/components/house/sidebar/HouseDetail";
 export default {
   name: "HouseList",
   data() {
     return {
-      model: null,
+      aptList: [],
+      currentLocation: null,
     };
   },
-  components: {
-    HouseListItem,
-    // HouseDetail
+  computed: {
+    isAptExist() {
+      if (this.$store.state.AptSearchStore.aptList) {
+        this.setAptList();
+        return true;
+      }
+      else return false;
+    }
   },
+  methods: {
+    setAptList() {
+      let list = [];
+      console.log("+++++++++++++++++++++++++++++++++++++");
+      for (const apt of this.$store.state.AptSearchStore.aptList) {
+        list.push(apt);
+        console.log(apt.apartmentName);
+      }
+      this.aptList = list;
+      console.log("this.aptList: ↓");
+      console.dir(this.aptList);
+      this.currentLocation = this.$store.state.AptSearchStore.currentLocation;
+    },
+  }
 };
 </script>
 

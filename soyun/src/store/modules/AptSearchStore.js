@@ -5,7 +5,8 @@ export default {
     sidoList: [],
     gugunList: [],
     dongList: [],
-    yearMonth: "",
+    aptList: [],
+    currentLocation: null,
   },
   mutations: {
     SET_SIDO(state, sidoList) {
@@ -38,11 +39,24 @@ export default {
       console.log("state.dongList ↓");
       console.dir(state.dongList);
     },
+    SET_APT_LIST(state, aptList) {
+      console.log("SET_APT_LIST called!!");
+      let list = [];
+      for (const apt of aptList) {
+        list.push(apt);
+      }
+      state.aptList = list;
+      console.log("state.aptList ↓");
+      console.dir(state.aptList);
+    },
+    SET_CURRENT_LOCATION(state, location) {
+      state.currentLocation = location;
+    },
   },
   actions: {
     async getSidoList(context) {
       console.log("getSidoList called!!");
-      await axios.get("//localhost:9999/house/sido")
+      await axios.get(`${process.env.VUE_APP_BACKEND_SERVER_URL}/house/sido`)
         .then(({ data }) => {
           console.log("sido data is arrived!");
           context.commit("SET_SIDO", data);
@@ -51,7 +65,7 @@ export default {
     async getGugunList(context, sidoCode) {
       console.log("getGugunList called!!");
       console.log("param sido: ", sidoCode);
-      await axios.get(`//localhost:9999/house/gugun/${sidoCode}`)
+      await axios.get(`${process.env.VUE_APP_BACKEND_SERVER_URL}/house/gugun/${sidoCode}`)
         .then(({ data }) => {
           console.log("gugun data is arrived!");
           context.commit("SET_GUGUN", data);
@@ -60,10 +74,20 @@ export default {
     async getDongList(context, gugunCode) {
       console.log("getDongList called!!");
       console.log("param gugun: ", gugunCode);
-      await axios.get(`//localhost:9999/house/dong/${gugunCode}`)
+      await axios.get(`${process.env.VUE_APP_BACKEND_SERVER_URL}/house/dong/${gugunCode}`)
         .then(({ data }) => {
           console.log("dong data is arrived!");
           context.commit("SET_DONG", data);
+        });
+    },
+    async getAptListBySelect(context, param) {
+      console.log("getAptListBySelect called!!");
+      console.log("param code: ", param.code);
+      console.log("param date: ", param.yearMonth);
+      await axios.get(`${process.env.VUE_APP_BACKEND_SERVER_URL}/house/apt/${param.code}/${param.yearMonth}`)
+        .then(({ data }) => {
+          console.log("apt list arrived!");
+          context.commit("SET_APT_LIST", data);
         });
     },
   },
