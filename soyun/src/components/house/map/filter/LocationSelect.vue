@@ -112,35 +112,19 @@ export default {
       }
       console.log("created");
       await this.$store.dispatch("getSidoList");
-      console.log("dispatch complete!!");
       this.sidoList = this.$store.state.AptSearchStore.sidoList;
-      console.log("this.sidoList ↓");
-      console.dir(this.sidoList);
-      console.log("====================");
     },
 
     async getGugunList(sido) {
-      console.log(`Button clicked!! -> (${sido.name})`);
       this.currentSido = sido;
-      console.log(`sido button is changed to ${this.currentSido}!!`);
       await this.$store.dispatch("getGugunList", sido.code);
-      console.log("dispatch complete!!");
       this.gugunList = this.$store.state.AptSearchStore.gugunList;
-      console.log("this.gugunList ↓");
-      console.dir(this.gugunList);
-      console.log("====================");
     }, 
 
     async getDongList(gugun) {
-      console.log(`Button clicked!! -> (${gugun.name})`);
       this.currentGugun = gugun;
-      console.log(`gugun button is changed to ${this.currentGugun}!!`);
       await this.$store.dispatch("getDongList", gugun.code);
-      console.log("dispatch complete!!");
       this.dongList = this.$store.state.AptSearchStore.dongList;
-      console.log("this.dongList ↓");
-      console.dir(this.dongList);
-      console.log("====================");
     },
 
     setCurrentDong(dong) {
@@ -167,9 +151,7 @@ export default {
         this.$store.state.AptSearchStore.aptList = [];
         this.aptList = [];
       }
-      console.log(`Button clicked!! -> (결과조회)`);
       let yearMonth = this.date.replace("-","");
-      console.log(">>>>>>>>>>>yearMonth", yearMonth);
       // 시도는 필수적으로 선택하도록 함
       if (!this.currentSido) {
         alert("시도를 먼저 선택해주세요.");
@@ -183,11 +165,8 @@ export default {
         }
       }
       console.log("dispatch complete!!");
-      this.$store.state.AptSearchStore.currentLocation = { loc: this.currentSido.name + " " + this.currentGugun.name + " " + this.currentDong.name };
+      this.$store.commit("SET_CURRENT_LOCATION", { loc: this.currentSido.name + " " + this.currentGugun.name + " " + this.currentDong.name });
       this.aptList = this.$store.state.AptSearchStore.aptList;
-      console.log("this.aptList ↓");
-      console.dir(this.aptList);
-      console.log("====================");
     }
   },
 };

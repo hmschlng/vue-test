@@ -12,8 +12,8 @@
                 {{ apt.apartmentName }}
               </v-list-item-title>
               <v-list-item-subtitle>{{ currentLocation.loc }} {{ apt.jibun }} 번지</v-list-item-subtitle>
-              <v-list-item-subtitle>34평</v-list-item-subtitle>
-              <v-list-item-subtitle>3억 2천만원</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ apt.area }} m<sup>3</sup></v-list-item-subtitle>
+              <v-list-item-subtitle>{{ apt.dealAmount }}</v-list-item-subtitle>
             </v-list-item-content>
             <v-list-item-avatar
               tile
@@ -47,6 +47,7 @@ export default {
   computed: {
     isAptExist() {
       if (this.$store.state.AptSearchStore.aptList) {
+        console.log("isAptExist called")
         this.setAptList();
         return true;
       }
@@ -55,15 +56,11 @@ export default {
   },
   methods: {
     setAptList() {
-      let list = [];
-      console.log("+++++++++++++++++++++++++++++++++++++");
-      for (const apt of this.$store.state.AptSearchStore.aptList) {
-        list.push(apt);
-        console.log(apt.apartmentName);
+      this.aptList = JSON.parse(JSON.stringify(this.$store.state.AptSearchStore.aptList));
+      for (const apt of this.aptList) {
+        apt.dealAmount = (Math.floor(parseInt(apt.dealAmount.replace(",", "")) / 10000)).toString() + "억 "
+          + (Math.floor(parseInt(apt.dealAmount.replace(",", "")) % 10000)).toString() + "만 원";
       }
-      this.aptList = list;
-      console.log("this.aptList: ↓");
-      console.dir(this.aptList);
       this.currentLocation = this.$store.state.AptSearchStore.currentLocation;
     },
   }

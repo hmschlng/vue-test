@@ -19,6 +19,9 @@ export default {
 </script>
 
 <style scoped>
+html {
+  position: absolute;
+}
 * {
   overflow: hidden !important;
 }
