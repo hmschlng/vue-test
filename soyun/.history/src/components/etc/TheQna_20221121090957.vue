@@ -1,0 +1,47 @@
+<template>
+  <div class="mt-6">
+    <board-list></board-list>
+    <v-row justify="end" class="my-4">
+      <!-- 문의하기 모달창 -->
+      <v-dialog v-model="dialog" persistent max-width="600px">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn v-bind="attrs" v-on="on"> 문의하기 </v-btn>
+        </template>
+        <v-card>
+          <v-card-title class="text-center text-h5"> 문의하기 </v-card-title>
+          <v-card-text>
+            <board-input-item type="qna"></board-input-item>
+            <small>최대한 빠르고 친절하게 답변드리겠습니다.</small>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" text @click="dialog = false">
+              등록
+            </v-btn>
+            <v-btn color="blue darken-1" text @click="dialog = false">
+              취소
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-row>
+  </div>
+</template>
+
+<script>
+import BoardList from "@/components/board/BoardList";
+import BoardInputItem from "@/components/board/item/BoardInputItem";
+
+export default {
+  name: "TheQna",
+  components: { BoardList, BoardInputItem },
+  data() {
+    return {
+      dialog: false,
+    };
+  },
+};
+</script>
+
+<style>
+</style>
