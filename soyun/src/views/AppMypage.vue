@@ -14,15 +14,17 @@
       </v-col>
       <v-spacer />
     </v-row>
+    <the-footer></the-footer>
   </v-main>
 </template>
 
 <script>
 import MypageSidebar from "@/components/mypage/MypageSidebar";
+import TheFooter from "@/components/layout/TheFooter";
 
 export default {
   name: "AppMyPage",
-  components: { MypageSidebar },
+  components: { MypageSidebar, TheFooter },
   data() {
     return {
       mainWidth: this.$store.state.mainStore.mainWidth + 1,

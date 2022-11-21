@@ -1,12 +1,9 @@
 <template>
   <v-main>
-    <the-banner></the-banner>
-    <v-row class="mt-5">
+    <v-row>
       <v-spacer />
       <v-col :cols="mainWidth">
-        <h1 class="text-center">부동산 뉴스</h1>
-        <search-bar></search-bar>
-        <board-list></board-list>
+        <the-banner></the-banner>
       </v-col>
       <v-spacer />
     </v-row>
@@ -14,38 +11,17 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
-import BoardList from "@/components/board/BoardList";
-import SearchBar from "@/components/layout/SearchBar";
 import TheBanner from "@/components/layout/TheBanner";
 
 export default {
   name: "AppNews",
   components: {
-    BoardList,
-    SearchBar,
     TheBanner,
   },
   data() {
     return {
       mainWidth: this.$store.state.mainStore.mainWidth,
-      options: [
-        {
-          text: "제목",
-          value: "title",
-        },
-        {
-          text: "내용",
-          value: "contents",
-        },
-      ],
     };
-  },
-   methods: {
-    ...mapMutations("boardStore", ["SET_SEARCH_OPTIONS"]),
-  },
-  created() {
-    this.SET_SEARCH_OPTIONS(this.options);
   },
 };
 </script>

@@ -1,14 +1,15 @@
 <template>
   <div class="mt-6">
-    <board-list></board-list>
     <v-row justify="end" class="my-4">
       <!-- 문의하기 모달창 -->
       <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn v-bind="attrs" v-on="on"> 문의하기 </v-btn>
+          <v-btn v-bind="attrs" v-on="on" large color="primary"> 문의하기 </v-btn>
         </template>
         <v-card>
-          <v-card-title class="justify-center text-h4 ma-8"> 문의하기 </v-card-title>
+          <v-card-title class="justify-center text-h4 ma-8">
+            문의하기
+          </v-card-title>
           <v-card-text>
             <board-input-item type="qna"></board-input-item>
             <small>최대한 빠르고 친절하게 답변드리겠습니다.</small>
@@ -25,6 +26,10 @@
         </v-card>
       </v-dialog>
     </v-row>
+    <board-list></board-list>
+    <div class="text-center my-8">
+      <v-pagination v-model="page" :length="6"></v-pagination>
+    </div>
   </div>
 </template>
 
@@ -37,6 +42,7 @@ export default {
   components: { BoardList, BoardInputItem },
   data() {
     return {
+      page: 1,
       dialog: false,
     };
   },
