@@ -2,9 +2,9 @@
   <div>
     <v-row align="center" justify="space-between" class="ma-1 mt-6">
       <v-col cols="3">
-      <v-select
-          v-model="select"
-          :items="getOptions"
+        <v-select
+          v-model="pageSize"
+          :items="pageSizes"
           dense
           outlined
           hide-details
@@ -48,6 +48,24 @@ export default {
           value: "author",
         },
       ],
+      pageSizes: [
+        {
+          text: "10개씩 보기",
+          value: "10",
+        },
+        {
+          text: "20개씩 보기",
+          value: "20",
+        },
+        {
+          text: "30개씩 보기",
+          value: "30",
+        },
+      ],
+      pageSize: {
+        text: "10개씩 보기",
+        value: "10",
+      },
     };
   },
   methods: {

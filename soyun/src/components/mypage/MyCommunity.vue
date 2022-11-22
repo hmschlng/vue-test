@@ -21,14 +21,14 @@ export default {
   data() {
     return {
       mainWidth: this.$store.state.mainStore.mainWidth,
-      tab: this.$store.state.boardStore.communityTab,
+      tab: this.$store.state.boardStore.categoryTab,
       tabs: ["정보 공유", "우리 동네"],
     };
   },
   methods: {
-    ...mapMutations("boardStore", ["SET_COMMUNITY_TAB"]),
+    ...mapMutations("boardStore", ["SET_CATEGORY_TAB"]),
     clickTab(selectedTab) {
-      this.SET_COMMUNITY_TAB(selectedTab);
+      this.SET_CATEGORY_TAB(selectedTab);
     },
   },
 };

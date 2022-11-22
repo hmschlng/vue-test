@@ -5,12 +5,13 @@
       placeholder="제목을 입력하세요."
       outlined
     ></v-text-field>
+    <v-col>
     <ckeditor
       :editor="editor"
       v-model="editorData"
       :config="editorConfig"
     />
-
+    </v-col>
     <v-row v-if="this.type !== 'qna'" justify="end" class="my-10">
       <v-btn
         v-if="this.type === 'register'"
@@ -44,7 +45,6 @@ export default {
       editorData: "",
       editorConfig: {
         // The configuration of the editor.
-        height: "500px",
         language: "ko",
       },
     };
@@ -62,4 +62,7 @@ export default {
 </script>
 
 <style>
+.ck-content {
+  min-height: 180px;
+}
 </style>

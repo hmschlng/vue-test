@@ -4,6 +4,7 @@
       <v-spacer />
       <v-col :cols="mainWidth">
         <the-banner></the-banner>
+        <news-list></news-list>
       </v-col>
       <v-spacer />
     </v-row>
@@ -12,11 +13,13 @@
 
 <script>
 import TheBanner from "@/components/layout/TheBanner";
+import NewsList from "@/components/news/NewsList";
 
 export default {
   name: "AppNews",
   components: {
     TheBanner,
+    NewsList
   },
   data() {
     return {
