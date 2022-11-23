@@ -148,8 +148,8 @@ export default {
 
     async getAptListBySelect() {
       // 기존에 있었던 검색 결과들은 초기화
-      if (this.$store.state.AptSearchStore.aptList) {
-        this.$store.state.AptSearchStore.aptList = [];
+      if (this.$store.state.aptSearchStore.aptList) {
+        this.$store.state.aptSearchStore.aptList = [];
         this.aptList = [];
       }
       let yearMonth = this.date.replace("-","");
@@ -167,7 +167,7 @@ export default {
       }
       console.log("dispatch complete!!");
       this.$store.commit("SET_CURRENT_LOCATION", { loc: this.currentSido.name + " " + this.currentGugun.name + " " + this.currentDong.name });
-      this.aptList = this.$store.state.AptSearchStore.aptList;
+      this.aptList = this.$store.state.aptSearchStore.aptList;
     }
   },
 };

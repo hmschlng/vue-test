@@ -1,10 +1,13 @@
 <template>
   <div style="position:absolute; top:64px; height:100%; width:100%;">
     <div id="map"></div>
+    <div v-show="isAptExist"></div>
   </div>
 </template>
 
 <script>
+// import { create } from "domain";
+
 export default {
   name: "KakaoMap",
   data() {
@@ -13,7 +16,14 @@ export default {
       infowindow: null,
     };
   },
+  created() {
+    console.log("KakaoMap.vue component created!!!");
+    let here = [36.355305246699125, 127.29846209705138];
+    this.markers.push(here);
+    // console.log("=============", this.markers);
+  },
   mounted() {
+    console.log("KakaoMap.vue component mounted!!!")
     if (window.kakao && window.kakao.maps) {
       this.initMap();
     } else {
@@ -25,17 +35,37 @@ export default {
       document.head.appendChild(script);
     }
   },
+  computed: {
+    isAptExist() {
+      if (this.$store.state.aptSearchStore.aptList) {
+        this.setAptListAndMarkers();
+        return true;
+      }
+      else return false;
+    }
+  },
   methods: {
     initMap() {
       const container = document.getElementById("map");
       const options = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 5,
+        center: new kakao.maps.LatLng(36.355305246699125, 127.29846209705138),
+        level: 2,
       };
-
       //지도 객체를 등록합니다.
       //지도 객체는 반응형 관리 대상이 아니므로 initMap에서 선언합니다.
       this.map = new kakao.maps.Map(container, options);
+    },
+    setAptListAndMarkers() {
+      this.aptList = JSON.parse(JSON.stringify(this.$store.state.aptSearchStore.aptList));
+      this.markers = [];
+      for (const apt of this.aptList) {
+        apt.dealAmount = (Math.floor(parseInt(apt.dealAmount.replace(",", "")) / 10000)).toString() + "억 "
+        + (Math.floor(parseInt(apt.dealAmount.replace(",", "")) % 10000)).toString() + "만 원";
+        let lnglat = [apt.lng, apt.lat];
+        this.markers.push(lnglat);
+      }
+      console.log("=============", this.markers);
+      this.displayMarker(this.markers);
     },
     displayMarker(markerPositions) {
       if (this.markers.length > 0) {
