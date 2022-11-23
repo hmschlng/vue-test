@@ -46,7 +46,7 @@ export default {
   },
   computed: {
     isAptExist() {
-      if (this.$store.state.AptSearchStore.aptList) {
+      if (this.$store.state.aptSearchStore.aptList) {
         console.log("isAptExist called")
         this.setAptList();
         return true;
@@ -56,12 +56,12 @@ export default {
   },
   methods: {
     setAptList() {
-      this.aptList = JSON.parse(JSON.stringify(this.$store.state.AptSearchStore.aptList));
+      this.aptList = JSON.parse(JSON.stringify(this.$store.state.aptSearchStore.aptList));
       for (const apt of this.aptList) {
         apt.dealAmount = (Math.floor(parseInt(apt.dealAmount.replace(",", "")) / 10000)).toString() + "억 "
           + (Math.floor(parseInt(apt.dealAmount.replace(",", "")) % 10000)).toString() + "만 원";
       }
-      this.currentLocation = this.$store.state.AptSearchStore.currentLocation;
+      this.currentLocation = this.$store.state.aptSearchStore.currentLocation;
     },
   }
 };

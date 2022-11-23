@@ -20,7 +20,7 @@ let store = new Vuex.Store({
     mainStore,
     boardStore,
     memberStore,
-    mypageStore,  
+    mypageStore,
   },
   plugins: [
     createPersistedState({

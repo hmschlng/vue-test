@@ -105,26 +105,27 @@ export default {
   },
   methods: {
     async getSidoList() {
+      console.log("mounted");
       // 기존에 있었던 검색 결과들은 초기화
-      if (this.$store.state.AptSearchStore.aptList) {
-        this.$store.state.AptSearchStore.aptList = [];
+      if (this.$store.state.aptSearchStore.aptList) {
+        this.$store.state.aptSearchStore.aptList = [];
         this.aptList = [];
       }
       console.log("created");
       await this.$store.dispatch("getSidoList");
-      this.sidoList = this.$store.state.AptSearchStore.sidoList;
+      this.sidoList = this.$store.state.aptSearchStore.sidoList;
     },
 
     async getGugunList(sido) {
       this.currentSido = sido;
       await this.$store.dispatch("getGugunList", sido.code);
-      this.gugunList = this.$store.state.AptSearchStore.gugunList;
+      this.gugunList = this.$store.state.aptSearchStore.gugunList;
     }, 
 
     async getDongList(gugun) {
       this.currentGugun = gugun;
       await this.$store.dispatch("getDongList", gugun.code);
-      this.dongList = this.$store.state.AptSearchStore.dongList;
+      this.dongList = this.$store.state.aptSearchStore.dongList;
     },
 
     setCurrentDong(dong) {

@@ -87,6 +87,7 @@ export default {
       await axios.get(`${process.env.VUE_APP_BACKEND_SERVER_URL}/house/apt/${param.code}/${param.yearMonth}`)
         .then(({ data }) => {
           console.log("apt list arrived!");
+          console.log(data);
           context.commit("SET_APT_LIST", data);
         });
     },

@@ -1,6 +1,8 @@
 <template>
-  <v-card class="pa-8" light width="800" max-height="800">
-    <v-card-title class="justify-center text-h4 mb-4">회원가입</v-card-title>
+  <v-card id="joinCard" class="pa-8" light width="900" max-height="650" style="top:32px">
+    <v-card-title class="justify-center text-h4 mb-4">
+      회원가입
+    </v-card-title>
     <v-form>
       <label>이메일</label>
       <v-row class="ma-0 pb-7" align="center">
@@ -10,9 +12,15 @@
         <!-- 비밀번호 수정 모달창 -->
         <v-dialog v-model="dialog" persistent max-width="500px">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn v-bind="attrs" v-on="on" large color="primary" x-large class="ml-4" @click="setLoading"
-              >이메일 인증</v-btn
+            <v-btn
+              v-bind="attrs"
+              v-on="on"
+              color="primary"
+              x-large class="ml-4"
+              @click="setLoading"
             >
+              이메일 인증
+            </v-btn>
           </template>
           <v-card class="pa-8 justify-center align-center" light width="500" height="400">
             <v-container v-show="isLoading" fill-height>
@@ -34,19 +42,49 @@
         </v-dialog>
       </v-row>
       <label>비밀번호</label>
-      <v-text-field v-model="password" type="password" outlined></v-text-field>
-      <label>비밀번호 재확인</label>
-      <v-text-field v-model="passwordConf" type="password" outlined></v-text-field>
+      <v-text-field
+        v-model="password"
+        :type="pwstatus"
+        outlined
+        :rules="rules"
+        placeholder="6 ~ 20자의 비밀번호를 입력하세요."
+      ></v-text-field>
+      <!-- 비밀번호 확인 -->
+      <label>비밀번호 확인</label> 
+      <v-btn-toggle group>
+        <v-btn x-small icon fab plain @click="showPasswordText">
+          <v-icon dense>{{ pwicon }}</v-icon>
+        </v-btn>
+      </v-btn-toggle>
+      <v-text-field
+        v-model="passwordConf"
+        :type="pwstatus"
+        outlined
+        placeholder=" 6 ~ 20자의 비밀번호를 입력하세요."
+      ></v-text-field>
+      <!-- 이름 -->
       <label>이름</label>
-      <v-text-field v-model="name" type="password" outlined></v-text-field>
+      <v-text-field
+        v-model="name"
+        type="text"
+        outlined
+        placeholder="ex) 홍길동"
+      ></v-text-field>
+      <!-- 연락처 -->
       <label>연락처</label>
-      <v-text-field v-model="phoneNumber" outlined></v-text-field>
+      <v-text-field
+        v-model="phoneNumber"
+        outlined
+        placeholder="ex) 010-1234-5678"
+      ></v-text-field>
       <v-btn x-large width="100%" :to="{ name: 'login' }" dark color="orange darken-2">가입하기</v-btn>
     </v-form>
   </v-card>
 </template>
 
 <script>
+// import { emitKeypressEvents } from "readline";
+
 export default {
   name: "MemberJoin",
   data() {
@@ -62,14 +100,40 @@ export default {
       dialog: false,
       isLoading: true,
       authCode: null,
+      // messages
+
+      // 비밀번호 관련
+      rules: [
+        value => !!value || '비밀번호를 입력하세요.',
+        value => (value && value.length >= 6 && value.length <= 20) || '비밀번호는 최소 5자 ~ 20자여야 합니다.',
+      ],
+      pwstatus: "password",
+      pwicon: "mdi-eye-off",
     };
   },
   methods: {
     setLoading() {
       setTimeout(() => (this.isLoading = false), 2000);
     },
+    showPasswordText() {
+      if (this.pwicon == "mdi-eye-off") {
+        this.pwstatus = "text";
+        this.pwicon = "mdi-eye";
+      } else {
+        this.pwstatus = "password";
+        this.pwicon = "mdi-eye-off";
+      }
+    }
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+#joinCard {
+  overflow: scroll !important;
+}
+::-webkit-scrollbar {
+  width: 0;
+  background-color: transparent;
+}
+</style>
