@@ -14,7 +14,11 @@
     </v-row>
     <board-list></board-list>
     <div class="text-center my-8">
-      <v-pagination v-model="page" :length="6" ></v-pagination>
+      <v-pagination
+        v-model="page"
+        :length="10"
+        @input="clickPage"
+      ></v-pagination>
     </div>
     <v-row align="center" justify="center" class="mb-8">
       <search-bar></search-bar>
@@ -33,7 +37,7 @@ export default {
   data() {
     return {
       mainWidth: this.$store.state.mainStore.mainWidth,
-      page: 1,
+      page: this.$store.state.boardStore.pgno,
       options: [
         {
           text: "제목",
@@ -69,7 +73,13 @@ export default {
     };
   },
   methods: {
-    ...mapMutations("boardStore", ["SET_SEARCH_OPTIONS"]),
+    ...mapMutations("boardStore", ["SET_SEARCH_OPTIONS", "SET_PGNO"]),
+    clickPage() {
+      this.SET_PGNO(this.page);
+      this.$router.go({
+        name: "boardlist",
+      });
+    },
   },
   created() {
     this.SET_SEARCH_OPTIONS(this.options);

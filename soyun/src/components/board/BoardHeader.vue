@@ -39,11 +39,13 @@ export default {
     };
   },
   methods: {
-    ...mapMutations("boardStore", ["SET_CATEGORY_TAB"]),
+    ...mapMutations("boardStore", ["SET_CATEGORY_TAB", "SET_PGNO", "SET_KEYWORD"]),
     clickTab(selectedTab) {
       this.SET_CATEGORY_TAB(selectedTab);
-      this.$router.push({
-        name: "boardmain",
+      this.SET_PGNO(this.page);
+      this.SET_KEYWORD(null);
+      this.$router.go({
+        name: "boardlist",
       });
     },
   },

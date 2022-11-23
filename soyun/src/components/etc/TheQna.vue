@@ -24,12 +24,13 @@
     </v-row>
     <board-list></board-list>
     <div class="text-center my-8">
-      <v-pagination v-model="page" :length="6"></v-pagination>
+      <v-pagination v-model="page" :length="10" @input="clickPage"></v-pagination>
     </div>
   </div>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import BoardList from "@/components/board/BoardList";
 
 export default {
@@ -37,9 +38,21 @@ export default {
   components: { BoardList },
   data() {
     return {
-      page: 1,
+      page: this.$store.state.boardStore.pgno,
       dialog: false,
     };
+  },
+  methods: {
+    ...mapMutations("boardStore", ["SET_SEARCH_OPTIONS", "SET_PGNO"]),
+    clickPage() {
+      this.SET_PGNO(this.page);
+      this.$router.go({
+        name: "boardlist",
+      });
+    },
+  },
+  created() {
+    this.SET_CATEGORY_TAB(3);
   },
 };
 </script>

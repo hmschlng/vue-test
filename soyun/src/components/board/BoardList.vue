@@ -8,7 +8,11 @@
         </tr>
       </thead>
       <tbody>
-        <board-list-item v-for="article in getList" :key="article.articleNo" v-bind="article"></board-list-item>
+        <board-list-item
+          v-for="article in articles"
+          :key="article.articleNo"
+          v-bind="article"
+        ></board-list-item>
       </tbody>
     </v-simple-table>
   </div>
@@ -34,26 +38,33 @@ export default {
       console.log();
       return this.$store.state.boardStore.categoryTab;
     },
-    getList() {
-      let param = {
-        category: this.$store.state.boardStore.categoryTab == 0 ? "share" : "local",
-        pgno: this.$store.state.boardStore.pgno,
-        pageSize: this.$store.state.boardStore.pageSize,
-        option: this.$store.state.boardStore.option,
-        keyword: this.$store.state.boardStore.keyword,
-      };
-      listArticle(
-        param,
-        ({ data }) => {
-          this.articles = data;
-          console.log(this.articles);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-      return this.articles;
-    },
+  },
+  created() {
+    let category = this.$store.state.boardStore.categoryTab;
+    let param = {
+      category:
+        category == 0
+          ? "share"
+          : category == 1
+          ? "local"
+          : category == 2
+          ? "notice"
+          : "one_on_one",
+      pgno: this.$store.state.boardStore.pgno,
+      pageSize: this.$store.state.boardStore.pageSize,
+      option: this.$store.state.boardStore.option,
+      keyword: this.$store.state.boardStore.keyword,
+    };
+    listArticle(
+      param,
+      ({ data }) => {
+        this.articles = data;
+        console.log(this.articles);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   },
 };
 </script>

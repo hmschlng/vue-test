@@ -17,7 +17,7 @@
           </v-card-text> -->
           <v-divider class="grey lighten-2"></v-divider>
           <v-simple-table class="grey lighten-3 grey--text ma-2">
-            <tr v-for="info in infos" :key="info">
+            <tr v-for="info in infos" :key="info.title">
               <th class="text-left">{{ info.title }}</th>
               <td class="text-left">{{ info.contents }}</td>
             </tr>

@@ -1,5 +1,5 @@
 <template>
-  <tr @click="moveDetail(articleno)">
+  <tr @click="moveDetail(articleNo)">
     <td>{{ articleNo }}</td>
     <th>{{ title }}</th>
     <td>{{ nickname }}</td>
@@ -21,10 +21,10 @@ export default {
     registerTime: String,
   },
   methods: {
-    moveDetail(articleno) {
+    moveDetail(articleNo) {
       this.$router.push({
         name: "boarddetail",
-        params: { articleno: articleno },
+        params: { articleNo: articleNo },
       });
     },
   },

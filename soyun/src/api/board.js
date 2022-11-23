@@ -3,14 +3,14 @@ import { apiInstance } from "./index";
 const api = apiInstance();
 const board = "/board";
 
-// /{category}
+// 
 function listArticle(param, success, fail) {
   api.get(`${board}`, {params: param}).then(success).catch(fail);
 }
 
 // /{articleNo}
 function getArticle(articleNo, success, fail) {
-  api.get(`${board}/view/${articleNo}`).then(success).catch(fail);
+  api.get(`${board}/${articleNo}`).then(success).catch(fail);
 }
 
 // /{category}/{pgno}/{pageSize}/{option}/{keyword}

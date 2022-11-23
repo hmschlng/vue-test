@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 let boardStore = {
   namespaced: true,
@@ -8,7 +8,7 @@ let boardStore = {
     categoryTab: 0, // 정보공유, 우리동네
     pgno: 1,
     pageSize: 10,
-    option: null,
+    option: "title",
     keyword: null,
     pageLength: 1,
   },
@@ -19,6 +19,9 @@ let boardStore = {
     },
     SET_SEARCH_OPTIONS(state, options) {
       state.searchOptions = options;
+    },
+    SET_PGNO(state, pgno) {
+      state.pgno = pgno;
     },
     SET_OPTION(state, option) {
       state.option = option;
@@ -34,20 +37,25 @@ let boardStore = {
     },
   },
   actions: {
-    async getBoardList(context) { 
-      await axios.get(`${process.env.VUE_APP_BACKEND_SERVER_URL}/board/${this.state.categoryTab}/${this.state.pgno}/${this.state.pageSize}`)
-        .then(({ data }) => { 
+    async getBoardList(context) {
+      await axios
+        .get(
+          `${process.env.VUE_APP_BACKEND_SERVER_URL}/board/${this.state.categoryTab}/${this.state.pgno}/${this.state.pageSize}`
+        )
+        .then(({ data }) => {
           context.commit("SET_PAGE_LENGTH", data.pageLength);
           context.commit("SET_BOARD_LIST", data.list);
         });
     },
-    async searchArticles(context) { 
-      await axios.get(`${process.env.VUE_APP_BACKEND_SERVER_URL}/board/${this.state.categoryTab}/${this.state.pgno}/${this.state.pageSize}/${this.state.option}/${this.state.keyword}`)
-        .then(({ data }) => { 
+    async searchArticles(context) {
+      await axios
+        .get(
+          `${process.env.VUE_APP_BACKEND_SERVER_URL}/board/${this.state.categoryTab}/${this.state.pgno}/${this.state.pageSize}/${this.state.option}/${this.state.keyword}`
+        )
+        .then(({ data }) => {
           context.commit("SET_BOARD_LIST", data);
         });
     },
-
   },
 };
 
