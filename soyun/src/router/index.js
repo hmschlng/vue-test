@@ -11,12 +11,12 @@ const routes = [
   {
     path: "/",
     name: "main",
-    component: () => import("@/components/views/AppMain"),
+    component: () => import("@/views/AppMain"),
   },
   {
     path: "/map",
     name: "map",
-    component: () => import("@/components/views/AppHouse"),
+    component: () => import("@/views/AppHouse"),
     redirect: "/map/main",
     children: [
       {
