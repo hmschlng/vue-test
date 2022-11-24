@@ -76,7 +76,7 @@
       ></v-date-picker>
     </v-menu>
     <div style="width: 5%"></div>
-    <v-btn id="menuBtn" @click="restoreSelected"><v-icon>mdi-tune</v-icon></v-btn>
+    <v-btn id="menuBtn" @click="restoreSelected"><v-icon>mdi-refresh</v-icon></v-btn>
     <v-btn id="menuBtn" @click="getAptListBySelect">결과 조회</v-btn>
   </v-btn-toggle>
 </template>

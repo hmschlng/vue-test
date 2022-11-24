@@ -13,32 +13,41 @@ export default {
   data() {
     return {
       markers: [],
+      pos:[],
+      here: [],
+      aptList: [],
       infowindow: null,
     };
   },
   created() {
-    console.log("KakaoMap.vue component created!!!");
-    let here = [36.355305246699125, 127.29846209705138];
-    this.markers.push(here);
-    // console.log("=============", this.markers);
-  },
-  mounted() {
-    console.log("KakaoMap.vue component mounted!!!")
-    if (window.kakao && window.kakao.maps) {
-      this.initMap();
-    } else {
-      const script = document.createElement("script");
-      /* global kakao */
-      script.onload = () => kakao.maps.load(this.initMap);
-      script.src =
-        `${process.env.VUE_APP_KAKAOMAP_API_SERVER_URL}?autoload=false&appkey=${process.env.VUE_APP_KAKAOMAP_API_KEY}`;
-      document.head.appendChild(script);
+    // let here = [36.355305246699125, 127.29846209705138];
+    
+    if (!("geolocation" in navigator)) {
+      return;
     }
+
+    navigator.geolocation.getCurrentPosition(pos => {
+      this.here = [36.35535021464917, 127.29849847726501];
+      console.log(pos);
+      if (window.kakao && window.kakao.maps) {
+        this.initMap();
+      } else {
+        const script = document.createElement("script");
+        /* global kakao */
+        script.onload = () => kakao.maps.load(this.initMap);
+        script.src =
+          `//${process.env.VUE_APP_KAKAOMAP_API_SERVER_URL}?autoload=false&appkey=${process.env.VUE_APP_KAKAOMAP_API_KEY}`;
+        document.head.appendChild(script);
+      }}, err => {
+        alert(err.message)
+    });
+    // this.markers.push(here);
+    // console.log("=============", this.markers);
   },
   computed: {
     isAptExist() {
-      if (this.$store.state.aptSearchStore.aptList) {
-        this.setAptListAndMarkers();
+      if (this.$store.state.aptSearchStore.aptList.length > 0) {
+        this.getAptList();
         return true;
       }
       else return false;
@@ -48,36 +57,39 @@ export default {
     initMap() {
       const container = document.getElementById("map");
       const options = {
-        center: new kakao.maps.LatLng(36.355305246699125, 127.29846209705138),
-        level: 2,
+        center: new kakao.maps.LatLng(this.here[0], this.here[1]),
+        level: 3,
       };
       //지도 객체를 등록합니다.
       //지도 객체는 반응형 관리 대상이 아니므로 initMap에서 선언합니다.
       this.map = new kakao.maps.Map(container, options);
+      this.displayMarker([this.here]);
     },
-    setAptListAndMarkers() {
+    getAptList() {
       this.aptList = JSON.parse(JSON.stringify(this.$store.state.aptSearchStore.aptList));
-      this.markers = [];
-      for (const apt of this.aptList) {
-        apt.dealAmount = (Math.floor(parseInt(apt.dealAmount.replace(",", "")) / 10000)).toString() + "억 "
-        + (Math.floor(parseInt(apt.dealAmount.replace(",", "")) % 10000)).toString() + "만 원";
-        let lnglat = [apt.lng, apt.lat];
-        this.markers.push(lnglat);
+      console.log("~~~~~getAptList.aptList: ", this.aptList);
+
+      this.pos = [];
+      for (let i = 0; i < this.aptList.length; i++) {
+        console.log("~~~~~aptList: ", this.aptList[i]);
+        this.pos.push([this.aptList[i].lat, this.aptList[i].lng]);
       }
-      console.log("=============", this.markers);
-      this.displayMarker(this.markers);
+      this.displayMarker(this.pos);
     },
     displayMarker(markerPositions) {
+      // 마커 표시 지우는 코드
       if (this.markers.length > 0) {
         this.markers.forEach((marker) => marker.setMap(null));
       }
 
+      // 마커의 죄표값을 LatLng객체로 만들어 positions 배열에 담기
       const positions = markerPositions.map(
         (position) => new kakao.maps.LatLng(...position)
       );
-
-      if (positions.length > 0) {
-        this.markers = positions.map(
+      console.log("~~~~~positions: ", positions);
+      // 마커 표시 및 지도 이동하기
+      if (positions.length > 0) { // 표시할 좌표 정보가 있으면
+        this.markers = positions.map( // 마커 생성
           (position) =>
             new kakao.maps.Marker({
               map: this.map,
@@ -89,11 +101,28 @@ export default {
           (bounds, latlng) => bounds.extend(latlng),
           new kakao.maps.LatLngBounds()
         );
-
+        
         this.map.setBounds(bounds);
       }
     },
+    // setAptListAndMarkers() {
+    //   // aptList 초기화
+    //   this.aptList = JSON.parse(JSON.stringify(this.$store.state.aptSearchStore.aptList));
+    //   // markers 초기화
+    //   if (this.markers.length > 0) {
+    //     this.markers.forEach((marker) => marker.setMap(null));
+    //   }
+    //   for (const apt of this.aptList) {
+    //     apt.dealAmount = (Math.floor(parseInt(apt.dealAmount.replace(",", "")) / 10000)).toString() + "억 "
+    //     + (Math.floor(parseInt(apt.dealAmount.replace(",", "")) % 10000)).toString() + "만 원";
+    //     let markerPos = [apt.lng, apt.lat];
+    //     this.markers.push(markerPos);
+    //   }
+    //   console.log("=============", this.markers);
+    //   this.displayMarker(this.markers);
+    // },
   },
+  // },
 };
 </script>
 
