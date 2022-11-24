@@ -3,15 +3,14 @@
     <v-list-item three-line>
       <v-list-item-content>
         <v-container>
-        <v-row justify="space-between">
-          <!-- <div class="grey--text fs-1">아파트</div> -->
-          <v-icon>mdi-cards-heart</v-icon>
-        </v-row>
+          <v-row justify="space-between">
+            <!-- <div class="grey--text fs-1">아파트</div> -->
+            <v-icon>mdi-cards-heart</v-icon>
+          </v-row>
         </v-container>
         <v-list-item-title class="mb-1">
-          풍림스페이스문3차아파트
         </v-list-item-title>
-        <v-list-item-subtitle>대전광역시 유성구 온천3동</v-list-item-subtitle>
+        <v-list-item-subtitle>{{apartmentName}}</v-list-item-subtitle>
       </v-list-item-content>
 
       <v-list-item-avatar tile size="80" color="grey">
@@ -50,7 +49,33 @@
 export default {
   name: "HouseListItem",
   props: {
-    
+    aptCode: Number,
+    buildYear: Number,
+    roadName: String,
+    roadNameBonbun: String,
+    roadNameBubun: String,
+    roadNameSeq: String,
+    roadNameBasementCode: String,
+    roadNameCode: String,
+    dong: String,
+    bonbun: String,
+    bubun: String,
+    sigunguCode: String,
+    eubmyundongCode: String,
+    dongCode: String,
+    landCode: String,
+    apartmentName: String,
+    jibun: String,
+    lng: String,
+    lat: String,
+    no: Number,
+    dealAmount: String,
+    dealYear: Number,
+    dealMonth: Number,
+    dealDay: Number,
+    area: String,
+    floor: String,
+    cancelDealType: String,
   },
   data() {
     return {
@@ -59,19 +84,19 @@ export default {
       aptInfo: [
         {
           title: "가격",
-          contents: "1000/150",
+          contents: this.dealAmount,
         },
         {
           title: "층수",
-          contents: "4층",
+          contents: this.floor,
         },
         {
           title: "면적",
-          contents: "30평",
+          contents: this.area,
         },
         {
-          title: "건축설립일",
-          contents: "2018.10.09",
+          title: "준공연도",
+          contents: this.buildYear,
         },
       ],
     };

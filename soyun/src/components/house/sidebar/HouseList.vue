@@ -23,8 +23,10 @@
 
 <script>
 // import HouseDetail from "@/components/house/sidebar/HouseDetail";
+import HouseListItem from "@/components/house/sidebar/HouseListItem";
 export default {
   name: "HouseList",
+  components: {HouseListItem},
   data() {
     return {
       aptList: this.$store.state.aptSearchStore.aptList,
