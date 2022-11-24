@@ -1,7 +1,6 @@
 <template>
   <v-app-bar id="listFilter" color="grey lighten-4" elevation="3" outlined permanent fixed>
     <v-btn-toggle id="listFilter" group dense>
-      <v-btn> 최신순 </v-btn>
 
       <v-btn @click="toggleArrow">
         가격순
@@ -9,6 +8,8 @@
       </v-btn>
 
       <v-btn> 면적순 </v-btn>
+
+      <v-btn> 준공년도순 </v-btn>
     </v-btn-toggle>
   </v-app-bar>
 </template>

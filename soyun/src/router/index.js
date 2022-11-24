@@ -14,11 +14,6 @@ const routes = [
     component: () => import("@/views/AppMain"),
   },
   {
-    path: "/header",
-    name: "header",
-    component: () => import("@/components/layout/TheHeader"),
-  },
-  {
     path: "/map",
     name: "map",
     component: () => import("@/views/AppHouse"),

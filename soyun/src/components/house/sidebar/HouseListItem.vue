@@ -4,7 +4,7 @@
       <v-list-item-content>
         <v-container>
         <v-row justify="space-between">
-          <div class="grey--text fs-1">아파트</div>
+          <!-- <div class="grey--text fs-1">아파트</div> -->
           <v-icon>mdi-cards-heart</v-icon>
         </v-row>
         </v-container>
@@ -49,6 +49,9 @@
 // import HouseDetail from "@/components/house/sidebar/HouseDetail";
 export default {
   name: "HouseListItem",
+  props: {
+    
+  },
   data() {
     return {
       show: false,
