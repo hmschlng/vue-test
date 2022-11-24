@@ -1,8 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import AppMain from "@/views/AppMain";
-import AppHouse from "@/views/AppHouse";
 // import AppCommunity from '@/views/AppCommunity'
 // import AppNews from '@/views/AppNews'
 // import AppMember from '@/views/AppMember'
@@ -13,12 +11,12 @@ const routes = [
   {
     path: "/",
     name: "main",
-    component: AppMain,
+    component: () => import("@/components/views/AppMain"),
   },
   {
     path: "/map",
     name: "map",
-    component: AppHouse,
+    component: () => import("@/components/views/AppHouse"),
     redirect: "/map/main",
     children: [
       {
