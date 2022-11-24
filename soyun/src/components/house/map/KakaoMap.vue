@@ -12,6 +12,7 @@ export default {
   name: "KakaoMap",
   data() {
     return {
+      map: [],
       markers: [],
       pos:[],
       here: [],
@@ -20,8 +21,7 @@ export default {
     };
   },
   created() {
-    // let here = [36.355305246699125, 127.29846209705138];
-    
+    // 유성캠 = [36.355305246699125, 127.29846209705138];
     if (!("geolocation" in navigator)) {
       return;
     }
@@ -76,6 +76,7 @@ export default {
       }
       this.displayMarker(this.pos);
     },
+
     displayMarker(markerPositions) {
       // 마커 표시 지우는 코드
       if (this.markers.length > 0) {
@@ -94,15 +95,34 @@ export default {
             new kakao.maps.Marker({
               map: this.map,
               position,
+              clickable: true,
             })
         );
 
+        for (const marker of this.markers) {
+          var iwContent = '<div style="width:50px;height:30px;padding:5px;">Hello World!</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+              iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+  
+          // 인포윈도우를 생성합니다
+          var infowindow = new kakao.maps.InfoWindow({
+              content : iwContent,
+              removable : iwRemoveable
+          });
+  
+          // 마커에 클릭이벤트를 등록합니다
+          kakao.maps.event.addListener(marker, 'click', function() {
+                // 마커 위에 인포윈도우를 표시합니다
+                infowindow.open(this.map, marker);  
+          });
+        }
         const bounds = positions.reduce(
           (bounds, latlng) => bounds.extend(latlng),
           new kakao.maps.LatLngBounds()
         );
         
         this.map.setBounds(bounds);
+
+        
       }
     },
     // setAptListAndMarkers() {
