@@ -24,6 +24,11 @@ function searchPw(emailId, success, fail) {
 }
 
 //
+function updatePass(member, success, fail) {
+  api.put(`${memberURL}/pass`, JSON.stringify(member)).then(success).catch(fail);
+}
+
+//
 function updateMember(member, success, fail) {
   api.put(`${memberURL}/update`, JSON.stringify(member)).then(success).catch(fail);
 }
@@ -33,4 +38,4 @@ function quit(member, success, fail) {
   api.delete(`${memberURL}/delete`, JSON.stringify(member)).then(success).catch(fail);
 }
 
-export { login, join, checkEmailId, searchPw, updateMember, quit };
+export { login, join, checkEmailId, searchPw, updatePass, updateMember, quit };

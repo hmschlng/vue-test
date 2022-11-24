@@ -4,18 +4,23 @@
     <router-link :to="{ name: 'main' }">
       <v-row align="center">
         <v-icon x-large>mdi-home-heart</v-icon>
-        <v-toolbar-title default>WHERE IS MY HOME</v-toolbar-title>
+        <v-toolbar-title default>SOBANG</v-toolbar-title>
       </v-row>
     </router-link>
 
     <v-spacer></v-spacer>
 
     <!-- 메뉴 -->
-    <v-btn v-for="menu in menus" :key="menu.link" text @click="clickMenu(menu.link)">
+    <v-btn
+      v-for="menu in menus"
+      :key="menu.link"
+      text
+      @click="clickMenu(menu.link)"
+    >
       {{ menu.value }}
     </v-btn>
 
-    <!-- 프로필 -->
+   <!-- 프로필 -->
     <div v-if="user==null">
       <v-btn text :to="{ name: 'login' }"> 로그인 | 회원가입 </v-btn>
     </div>
@@ -25,28 +30,48 @@
       </v-avatar>
       <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
-          <v-btn color="transparent" elevation="0" v-bind="attrs" v-on="on">{{ user.name }} 님</v-btn>
+          <v-btn color="transparent" elevation="0" v-bind="attrs" v-on="on"
+            >
+            {{ user.name }} 
+            
+            님</v-btn
+          >
         </template>
         <v-list>
           <v-list-item>
             <v-row>
               <v-col>
                 <v-avatar size="36">
-                  <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+                  <img
+                    src="https://cdn.vuetifyjs.com/images/john.jpg"
+                    alt="John"
+                  />
                 </v-avatar>
               </v-col>
               <v-col>
-                <v-list-item-title class="text-h6">{{ user.name }}</v-list-item-title>
-                <v-list-item-subtitle>{{ user.emailId }}</v-list-item-subtitle>
+                <v-list-item-title class="text-h6">
+                  {{user.name}}
+                </v-list-item-title>
+                <v-list-item-subtitle>
+                  <!-- {{ user.emailId }} -->
+                  </v-list-item-subtitle>
               </v-col>
             </v-row>
           </v-list-item>
         </v-list>
         <v-divider class="grey"></v-divider>
         <v-list>
-          <v-list-item v-for="(item, index) in mypage" :key="index" class="justify-space-around">
+          <v-list-item
+            v-for="(item, index) in mypage"
+            :key="index"
+            class="justify-space-around"
+          >
             <v-icon>mdi-{{ item.icon }}</v-icon>
             <v-btn :to="{ name: item.link }" text> {{ item.value }}</v-btn>
+          </v-list-item>
+          <v-list-item class="justify-space-around">
+            <v-icon>mdi-account-arrow-right-outline</v-icon>
+            <v-btn @click="logout" text>로그아웃</v-btn>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -62,6 +87,7 @@ export default {
   data() {
     return {
       user: this.$store.state.memberStore.user,
+      // login: false,
       menus: [
         {
           link: "map",
@@ -102,16 +128,25 @@ export default {
           value: "고객센터",
           icon: "face-agent",
         },
-        {
-          link: "main",
-          value: "로그아웃",
-          icon: "account-arrow-right-outline",
-        },
       ],
     };
   },
+  // computed: {
+  //   isLoggedIn() {
+  //     if (this.login) {
+  //       // this.setIsLogin();
+  //       return true;
+  //     }
+  //     return false;
+  //   },
+  // },
   methods: {
-    ...mapMutations("boardStore", ["SET_CATEGORY_TAB", "SET_KEYWORD", "SET_PGNO"]),
+    ...mapMutations("boardStore", [
+      "SET_CATEGORY_TAB",
+      "SET_KEYWORD",
+      "SET_PGNO",
+    ]),
+    ...mapMutations("memberStore", ["SET_USER", "SET_LOGINED"]),
     clickMenu(link) {
       if (link === "community") {
         this.SET_CATEGORY_TAB(0);
@@ -122,17 +157,22 @@ export default {
         name: link,
       });
     },
+    logout() {
+      this.SET_USER(null);
+      this.SET_LOGINED(false);
+      this.login = false;
+      this.$router.push({ name: "main" });
+    },
+    // setIsLogin() {
+    //   this.login = true;
+    //   this.$router.push({ name: "main" });
+    // },
   },
-  // computed: {
-  //   getUser(){
-  //     // this.user = this.$store.state.memberStore.user;
-  //     return this.user;
-  //   },
-  // },
+ 
 };
 </script>
 
-<style>
+<style scoped>
 a {
   text-decoration: none;
 }

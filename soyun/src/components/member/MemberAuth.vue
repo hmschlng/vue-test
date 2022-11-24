@@ -9,8 +9,8 @@
       <v-card-title class="justify-center text-h4 mb-12">이메일 인증</v-card-title>
       <form>
         <label>인증코드</label>
-        <v-text-field v-model="authCode" outlined></v-text-field>
-        <v-btn :to="{ name: 'updatepw' }" class="my-12" large width="100%" dark color="orange darken-2"
+        <v-text-field v-model="code" outlined></v-text-field>
+        <v-btn @click="clickAuth" class="my-12" large width="100%" dark color="orange darken-2"
           >인증 확인</v-btn
         >
       </form>
@@ -21,14 +21,27 @@
 <script>
 export default {
   name: "MemberAuth",
+  props: {
+    authCode: Number,
+  },
   data() {
     return {
       isLoading: true,
-      authCode: null,
+      code: null,
     };
   },
   created() {
     setTimeout(() => (this.isLoading = false), 2000);
+  },
+  methods: {
+    clickAuth(){
+      if(this.code==this.authCode){
+        alert("인증에 성공했습니다.");
+        this.$router.push({name: "updatepw"});
+      }else {
+        alert("올바른 인증코드가 아닙니다.");
+      }
+    }
   },
 };
 </script>

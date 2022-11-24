@@ -6,7 +6,7 @@
         <v-col :cols="mainWidth">
           <v-row align="center" class="ma-4">
             <v-icon x-large color="grey">mdi-home-heart</v-icon>
-            <v-toolbar-title default>WHERE IS MY HOME</v-toolbar-title>
+            <v-toolbar-title default>SOBANG</v-toolbar-title>
           </v-row>
           <!-- <v-card-text>
             <v-btn v-for="icon in icons" :key="icon" class="mx-4 grey--text" icon>
@@ -42,7 +42,7 @@ export default {
       infos: [
         {
           title: "상호명",
-          contents: "(주)소방",
+          contents: "(주)소방 - 소중한 나의 방",
         },
         {
           title: "공동대표",
