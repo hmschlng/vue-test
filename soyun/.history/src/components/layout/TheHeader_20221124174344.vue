@@ -123,12 +123,12 @@ export default {
       });
     },
   },
-  // computed: {
-  //   getUser(){
-  //     // this.user = this.$store.state.memberStore.user;
-  //     return this.user;
-  //   },
-  // },
+  computed: {
+    getUser(){
+      // this.user = this.$store.state.memberStore.user;
+      return this.user;
+    },
+  },
 };
 </script>
 

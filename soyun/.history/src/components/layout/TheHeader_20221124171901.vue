@@ -16,9 +16,7 @@
     </v-btn>
 
     <!-- 프로필 -->
-    <div v-if="user==null">
-      <v-btn text :to="{ name: 'login' }"> 로그인 | 회원가입 </v-btn>
-    </div>
+    <div v-if="user == null"></div>
     <div v-else>
       <v-avatar size="32">
         <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
@@ -75,6 +73,10 @@ export default {
           link: "news",
           value: "부동산 뉴스",
         },
+        {
+          link: "login",
+          value: "로그인 | 회원가입",
+        },
       ],
       mypage: [
         {
@@ -123,12 +125,6 @@ export default {
       });
     },
   },
-  // computed: {
-  //   getUser(){
-  //     // this.user = this.$store.state.memberStore.user;
-  //     return this.user;
-  //   },
-  // },
 };
 </script>
 

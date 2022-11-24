@@ -14,9 +14,9 @@
     <v-btn v-for="menu in menus" :key="menu.link" text @click="clickMenu(menu.link)">
       {{ menu.value }}
     </v-btn>
-
+{{getUser}}
     <!-- 프로필 -->
-    <div v-if="user==null">
+    <div v-if="!getUser">
       <v-btn text :to="{ name: 'login' }"> 로그인 | 회원가입 </v-btn>
     </div>
     <div v-else>
@@ -123,12 +123,12 @@ export default {
       });
     },
   },
-  // computed: {
-  //   getUser(){
-  //     // this.user = this.$store.state.memberStore.user;
-  //     return this.user;
-  //   },
-  // },
+  computed: {
+    getUser(){
+      this.user = this.$store.state.memberStore.user;
+      return this.user;
+    },
+  },
 };
 </script>
 

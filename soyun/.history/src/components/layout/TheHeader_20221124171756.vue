@@ -16,41 +16,37 @@
     </v-btn>
 
     <!-- 프로필 -->
-    <div v-if="user==null">
-      <v-btn text :to="{ name: 'login' }"> 로그인 | 회원가입 </v-btn>
-    </div>
-    <div v-else>
-      <v-avatar size="32">
-        <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
-      </v-avatar>
-      <v-menu offset-y>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn color="transparent" elevation="0" v-bind="attrs" v-on="on">{{ user.name }} 님</v-btn>
-        </template>
-        <v-list>
-          <v-list-item>
-            <v-row>
-              <v-col>
-                <v-avatar size="36">
-                  <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
-                </v-avatar>
-              </v-col>
-              <v-col>
-                <v-list-item-title class="text-h6">{{ user.name }}</v-list-item-title>
-                <v-list-item-subtitle>{{ user.emailId }}</v-list-item-subtitle>
-              </v-col>
-            </v-row>
-          </v-list-item>
-        </v-list>
-        <v-divider class="grey"></v-divider>
-        <v-list>
-          <v-list-item v-for="(item, index) in mypage" :key="index" class="justify-space-around">
-            <v-icon>mdi-{{ item.icon }}</v-icon>
-            <v-btn :to="{ name: item.link }" text> {{ item.value }}</v-btn>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-    </div>
+    <
+    <v-avatar size="32">
+      <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+    </v-avatar>
+    <v-menu offset-y>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn color="transparent" elevation="0" v-bind="attrs" v-on="on">{{user.name}} 님</v-btn>
+      </template>
+      <v-list>
+        <v-list-item>
+          <v-row>
+            <v-col>
+              <v-avatar size="36">
+                <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+              </v-avatar>
+            </v-col>
+            <v-col>
+              <v-list-item-title class="text-h6">{{user.name}}</v-list-item-title>
+              <v-list-item-subtitle>{{user.emailId}}</v-list-item-subtitle>
+            </v-col>
+          </v-row>
+        </v-list-item>
+      </v-list>
+      <v-divider class="grey"></v-divider>
+      <v-list>
+        <v-list-item v-for="(item, index) in mypage" :key="index" class="justify-space-around">
+          <v-icon>mdi-{{ item.icon }}</v-icon>
+          <v-btn :to="{ name: item.link }" text> {{ item.value }}</v-btn>
+        </v-list-item>
+      </v-list>
+    </v-menu>
   </v-app-bar>
 </template>
 
@@ -74,6 +70,10 @@ export default {
         {
           link: "news",
           value: "부동산 뉴스",
+        },
+        {
+          link: "login",
+          value: "로그인 | 회원가입",
         },
       ],
       mypage: [
@@ -123,12 +123,6 @@ export default {
       });
     },
   },
-  // computed: {
-  //   getUser(){
-  //     // this.user = this.$store.state.memberStore.user;
-  //     return this.user;
-  //   },
-  // },
 };
 </script>
 

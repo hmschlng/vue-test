@@ -16,10 +16,10 @@
     </v-btn>
 
     <!-- 프로필 -->
-    <div v-if="user==null">
+    <div :v-if="user == null">
       <v-btn text :to="{ name: 'login' }"> 로그인 | 회원가입 </v-btn>
     </div>
-    <div v-else>
+    <div :v-else>
       <v-avatar size="32">
         <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
       </v-avatar>
@@ -123,12 +123,6 @@ export default {
       });
     },
   },
-  // computed: {
-  //   getUser(){
-  //     // this.user = this.$store.state.memberStore.user;
-  //     return this.user;
-  //   },
-  // },
 };
 </script>
 
